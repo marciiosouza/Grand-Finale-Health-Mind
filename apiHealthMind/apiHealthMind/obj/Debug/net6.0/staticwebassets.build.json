@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "X16p2YbhaZyd3eaBpFYXSsU4f9ZuGREqgELO5SL67Qg=",
+  "Source": "apiHealthMind",
+  "BasePath": "_content/apiHealthMind",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
