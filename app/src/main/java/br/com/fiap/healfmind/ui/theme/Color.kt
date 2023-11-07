@@ -16,3 +16,8 @@ val Pink40 = Color(0xFF7D5260)
 val ColorPrimary = Color(0xFF005DF9)
 val ColorSecundary = Color(0xFF00F0AD)
 val ColorTertiary = Color(0xFF969696)
+val ColorWhite = Color(0xFFFFFFFF)
+
+
+val blue_gradient = Color(0xFF005FFF)
+val purple_gradient = Color(0xFF5200FF)
