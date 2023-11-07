@@ -20,6 +20,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -33,6 +35,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalMapOf
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -70,60 +73,127 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
     Box(modifier = Modifier
         .background(
-            ColorWhite
+            Brush.linearGradient(
+                colors = listOf(
+                    blue_gradient,
+                    purple_gradient
+                )
+            )
         )
     )
 
-   {
-       Column(
-           modifier = Modifier
-               .fillMaxSize()
-               .padding(top = 40.dp),
-           verticalArrangement = Arrangement.Center,
-           horizontalAlignment = Alignment.CenterHorizontally
-       )
+    {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 40.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Text(
+                text = "Faça seu Login",
+                style = TextStyle(
+                    fontSize = 22.sp,
+                    fontFamily = FontFamily(Font(R.font.inter_bold)),
+                    fontWeight = FontWeight(700),
+                    color = Color(0xFFFFFFFF),
+                )
+            )
 
-       {
-           Text(text = "Login",
-               fontFamily = Inter,
-               fontSize = 22.sp,
-           )
+            Spacer(modifier = Modifier
+                .height(16.dp)
+            )
 
-           Spacer(modifier = Modifier
-               .height(16.dp))
 
-           OutlinedTextField(
-               value = "",
-               onValueChange = {},
-               label = {
-                   Text(text = "E-mail")
-               }
-           )
 
-           OutlinedTextField(
-               value = "",
-               onValueChange = {},
-               label = {
-                   Text(text = "Senha")
-               }
-           )
+            Box(modifier = Modifier
+                .background(
+                    colorResource(R.color.white),
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .width(303.dp)
+                .height(50.dp),
+            ){
+                TextField( modifier = Modifier
+                    .shadow(
+                        elevation = 4.dp,
+                        spotColor = Color(0x1A000000),
+                        ambientColor = Color(0x1A000000)
+                    )
+
+                    value = "",
+                    onValueChange = {},
+                    label = {
+                        Text(
+                            text = "E-mail",
+                            style = TextStyle(
+                                fontSize = 12.sp,
+                                fontFamily = FontFamily(Font(R.font.inter_regular)),
+                                fontWeight = FontWeight(400),
+                                color = Color(0x4A000000),
+                            )
+                        )
+                    }
+                )
+            }
+
+
 
             Spacer(modifier = Modifier
                 .height(16.dp))
 
-           Button(onClick = { /*TODO*/ }) {
-               Text(text = "Entrar")
-           }
+            TextField( modifier = Modifier
+                .shadow(
+                    elevation = 4.dp,
+                    spotColor = Color(0x1A000000),
+                    ambientColor = Color(0x1A000000)
+                )
+                .width(303.dp)
+                .height(50.dp)
+                .background(
+                    color = Color(0xFFFAFAFA),
+                    shape = RoundedCornerShape(size = 10.dp)
+                ),
 
-           Button(onClick = { /*TODO*/ }) {
-               Text(text = "Entrar com o Google")
-           }
+                value = "",
+                onValueChange = {},
+                label = {
+                    Text(
+                        text = "Senha",
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.inter_regular)),
+                            fontWeight = FontWeight(400),
+                            color = Color(0x4A000000),
+                        )
+                    )
+                }
+            )
 
-           TextButton(onClick = { /*TODO*/ }) {
-               Text(text = "Esqueci minha senha")
-           }
-       }
-   }
+            Spacer(modifier = Modifier
+                .height(16.dp))
+
+            Button(onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .background(
+                        blue_gradient
+                    )
+                    .width(303.dp)
+                    .height(50.dp),
+
+                ) {
+                Text(text = "Entrar")
+            }
+
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Entrar com o Google")
+            }
+
+            TextButton(onClick = { /*TODO*/ }) {
+                Text(text = "Esqueci minha senha")
+            }
+        }
+    }
 }
 
 
