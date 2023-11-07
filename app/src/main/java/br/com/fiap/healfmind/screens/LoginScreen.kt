@@ -106,36 +106,30 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
 
 
-            Box(modifier = Modifier
-                .background(
-                    colorResource(R.color.white),
-                    shape = RoundedCornerShape(10.dp)
-                )
-                .width(303.dp)
-                .height(50.dp),
-            ){
-                TextField( modifier = Modifier
-                    .shadow(
-                        elevation = 4.dp,
-                        spotColor = Color(0x1A000000),
-                        ambientColor = Color(0x1A000000)
+            Box(
+                modifier = Modifier
+                    .background(
+                        color = colorResource(id = R.color.white),
+                        shape = RoundedCornerShape(10.dp)
                     )
-
+                    .width(303.dp)
+                    .height(50.dp)
+            ) /*{
+                TextField(
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { },
                     label = {
                         Text(
                             text = "E-mail",
                             style = TextStyle(
                                 fontSize = 12.sp,
                                 fontFamily = FontFamily(Font(R.font.inter_regular)),
-                                fontWeight = FontWeight(400),
-                                color = Color(0x4A000000),
+                                fontWeight = FontWeight(400)
                             )
                         )
                     }
                 )
-            }
+            }*/
 
 
 
