@@ -90,12 +90,20 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
+            Image(painter = painterResource(id = R.drawable.logo),
+                contentDescription = "",
+                modifier = Modifier
+                    .width(140.dp)
+                    .height(112.41309.dp)
+            )
+
+            Spacer(modifier = Modifier.height(60.dp))
+            
             Text(
                 text = "Realizar Cadastro",
                 style = TextStyle(
                     fontSize = 22.sp,
                     fontFamily = FontFamily(Font(R.font.inter_bold)),
-                    fontWeight = FontWeight(700),
                     color = Color(0xFFFFFFFF),
                 )
             )
@@ -231,7 +239,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                     )
                 )
 
-                Spacer(modifier = Modifier.width(107.dp))
+                Spacer(modifier = Modifier.width(17.dp))
 
                 Image(
                     painter = painterResource(id = R.drawable.google),

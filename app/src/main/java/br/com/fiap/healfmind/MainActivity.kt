@@ -32,17 +32,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberAnimatedNavController()
+
             HealfMindTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
                         .fillMaxHeight()
                         .fillMaxWidth(),
                     color = MaterialTheme.colorScheme.background,
+                    )
+                {
 
-                    ) {
-                    // animaçãona transição da tela
-                    val navController = rememberAnimatedNavController()
                     AnimatedNavHost(
                         navController = navController,
                         startDestination = "Login",
@@ -59,8 +59,6 @@ class MainActivity : ComponentActivity() {
                         }
                     ){
                         composable(route = "Login"){
-                            // Passando a instancia de LoginScreenViewModel usando a chave para usar o construtor da classe
-                            // Nav controle instancia de navegação entre telas
                             LoginScreen( LoginScreenViewModel() ,navController)
                         }
                         composable(route = "Home/{nome}"){
@@ -68,7 +66,6 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(nome!!, navController ) // double bang -> Tratar valoresNull
                             //HomeScreen( ) // double bang -> Tratar valoresNull
                         }
-
                         composable(route = "Perfil"){
                             PerfilScreen( navController )
                         }
@@ -81,11 +78,8 @@ class MainActivity : ComponentActivity() {
                         composable(route = "Meditacoes"){
                             MeditacoesScreen(meditacoes = dataMeditacao , navController)
                         }
-
                     }
-
                 }
-
             }
         }
     }

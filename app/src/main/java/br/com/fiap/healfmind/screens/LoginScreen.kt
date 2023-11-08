@@ -96,6 +96,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
         )
     )
 
+
+
     {
         Column(
             modifier = Modifier
@@ -104,12 +106,20 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
+            Image(painter = painterResource(id = R.drawable.logo),
+                contentDescription = "",
+                modifier = Modifier
+                    .width(140.dp)
+                    .height(112.41309.dp)
+            )
+
+            Spacer(modifier = Modifier.height(80.dp))
+
             Text(
                 text = "Faça seu Login",
                 style = TextStyle(
                     fontSize = 22.sp,
                     fontFamily = FontFamily(Font(R.font.inter_bold)),
-                    fontWeight = FontWeight(700),
                     color = Color(0xFFFFFFFF),
                 )
             )
