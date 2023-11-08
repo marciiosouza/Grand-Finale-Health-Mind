@@ -1,9 +1,12 @@
+import android.graphics.drawable.Icon
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,14 +16,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,6 +44,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.colorResource
@@ -61,6 +74,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavController) {
 
@@ -100,60 +114,54 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 )
             )
 
-            Spacer(modifier = Modifier
-                .height(16.dp)
-            )
+            Spacer(modifier = Modifier.height(38.dp))
 
-
-
-            Box(
-                modifier = Modifier
-                    .background(
-                        color = colorResource(id = R.color.white),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .width(303.dp)
-                    .height(50.dp)
-            ) /*{
-                TextField(
-                    value = "",
-                    onValueChange = { },
-                    label = {
-                        Text(
-                            text = "E-mail",
-                            style = TextStyle(
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily(Font(R.font.inter_regular)),
-                                fontWeight = FontWeight(400)
-                            )
-                        )
-                    }
-                )
-            }*/
-
-
-
-            Spacer(modifier = Modifier
-                .height(16.dp))
-
-            TextField( modifier = Modifier
-                .shadow(
-                    elevation = 4.dp,
-                    spotColor = Color(0x1A000000),
-                    ambientColor = Color(0x1A000000)
-                )
+            OutlinedTextField(modifier = Modifier
                 .width(303.dp)
                 .height(50.dp)
                 .background(
                     color = Color(0xFFFAFAFA),
                     shape = RoundedCornerShape(size = 10.dp)
-                ),
+                )
+                .border(0.dp, Color.Transparent),
 
                 value = "",
-                onValueChange = {},
-                label = {
+                onValueChange = { },
+
+               placeholder = {
+                   Text(
+                       text = "Digite o seu e-mail",
+                       style = TextStyle(
+                           fontSize = 12.sp,
+                           fontFamily = FontFamily(Font(R.font.inter_regular)),
+                           fontWeight = FontWeight(400),
+                           color = Color(0x4A000000),
+                       )
+                   )
+               },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.Transparent,
+                )
+            )
+
+            Spacer(modifier = Modifier.height(17.dp))
+
+            OutlinedTextField(modifier = Modifier
+                .width(303.dp)
+                .height(50.dp)
+                .background(
+                    color = Color(0xFFFAFAFA),
+                    shape = RoundedCornerShape(size = 10.dp)
+                )
+                .border(0.dp, Color.Transparent),
+
+                value = "",
+                onValueChange = { },
+
+                placeholder = {
                     Text(
-                        text = "Senha",
+                        text = "Digite a sua senha",
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontFamily = FontFamily(Font(R.font.inter_regular)),
@@ -161,34 +169,78 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                             color = Color(0x4A000000),
                         )
                     )
-                }
+                },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.Transparent,
+                )
             )
 
-            Spacer(modifier = Modifier
-                .height(16.dp))
+            Spacer(modifier = Modifier.height(17.dp))
 
-            Button(onClick = { /*TODO*/ },
+            Button(
+                onClick = { /*TODO*/ },
                 modifier = Modifier
-                    .background(
-                        blue_gradient
-                    )
                     .width(303.dp)
                     .height(50.dp),
+                shape = RoundedCornerShape(size = 10.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.azul))
 
-                ) {
+            ) {
                 Text(text = "Entrar")
             }
 
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Entrar com o Google")
+            Spacer(modifier = Modifier.height(17.dp))
+
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .width(303.dp)
+                    .height(50.dp),
+                shape = RoundedCornerShape(size = 10.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.white)
+                )
+            ) {
+                    Text(
+                        text = "Entrar com o Google",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontFamily = FontFamily(Font(R.font.inter_regular)),
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFF000000)
+                        )
+                    )
+
+                    Spacer(modifier = Modifier.width(20.dp))
+
+                    Image(
+                        painter = painterResource(id = R.drawable.google),
+                        contentDescription = "Seta para esquerda",
+                        modifier = Modifier.size(15.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                TextButton(onClick = { /*TODO*/ }) {
+                    Text(
+                        text = "Criar conta com e-mail",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontFamily = FontFamily(Font(R.font.inter_regular)),
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFFFFFFFF),
+                        )
+                    )
+                }
             }
 
-            TextButton(onClick = { /*TODO*/ }) {
-                Text(text = "Esqueci minha senha")
-            }
+
         }
     }
-}
+
 
 
 @Composable
