@@ -189,7 +189,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             Spacer(modifier = Modifier.height(17.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate("Home/Marcio") },
                 modifier = Modifier
                     .width(303.dp)
                     .height(50.dp),
@@ -228,7 +228,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     Image(
                         painter = painterResource(id = R.drawable.google),
                         contentDescription = "Seta para esquerda",
-                        modifier = Modifier.size(15.dp)
+                        modifier = Modifier.size(20.dp),
                     )
                 }
 
