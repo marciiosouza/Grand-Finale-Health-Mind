@@ -244,7 +244,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 Image(
                     painter = painterResource(id = R.drawable.google),
                     contentDescription = "Seta para esquerda",
-                    modifier = Modifier.size(15.dp)
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }

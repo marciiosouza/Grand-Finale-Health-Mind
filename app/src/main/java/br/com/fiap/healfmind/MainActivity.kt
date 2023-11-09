@@ -29,12 +29,19 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import androidx.compose.material3.Surface as Surface
 
+
+
 class MainActivity : ComponentActivity() {
+
+
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             val navController = rememberAnimatedNavController()
+
+            MainScreen()
 
             HealfMindTheme {
                 Surface(
