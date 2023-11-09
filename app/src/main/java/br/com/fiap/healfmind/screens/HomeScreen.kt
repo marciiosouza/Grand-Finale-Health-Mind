@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.BottonNavScreen
 import br.com.fiap.healfmind.components.Header
 import com.example.healf_mind.components.CardHome
 
@@ -267,6 +268,7 @@ fun HomeScreen(nome: String , navController: NavController) {
                     )
                 }
             }
+            BottonNavScreen()
         }
     }
 }

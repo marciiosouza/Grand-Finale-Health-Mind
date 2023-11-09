@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
@@ -80,10 +81,16 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
     val texto by loginScreenViewModel.texto.observeAsState(initial = "")
     val senha by loginScreenViewModel.password.observeAsState(initial = "")
+    var email by remember { mutableStateOf("") }
     val tamanhoMax  = 10
-    var erroEmail by remember {
-        mutableStateOf(false)
+
+    var isEmailValid by remember { mutableStateOf(true) }
+
+    fun isEmailValid(email: String): Boolean {
+        val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+        return email.matches(emailRegex)
     }
+
 
     Box(modifier = Modifier
         .background(
@@ -134,9 +141,13 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     shape = RoundedCornerShape(size = 10.dp)
                 )
                 .border(0.dp, Color.Transparent),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                value = texto,
+                onValueChange = {
+                    loginScreenViewModel.onTextoChanged(it)
 
-                value = "",
-                onValueChange = { },
+                    isEmailValid = isEmailValid(texto)
+                },
 
                placeholder = {
                    Text(
@@ -154,7 +165,12 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     unfocusedBorderColor = Color.Transparent,
                 )
             )
-
+            if (!isEmailValid) {
+                Text(
+                    text = "Por favor, insira um e-mail válido.",
+                    color = Color.Red
+                )
+            }
             Spacer(modifier = Modifier.height(17.dp))
 
             OutlinedTextField(modifier = Modifier
@@ -166,9 +182,11 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 )
                 .border(0.dp, Color.Transparent),
 
-                value = "",
-                onValueChange = { },
-
+                value = senha,
+                onValueChange = {
+                                loginScreenViewModel.onPasswordChanged(it)
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password) ,
                 placeholder = {
                     Text(
                         text = "Digite a sua senha",
@@ -189,7 +207,9 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             Spacer(modifier = Modifier.height(17.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                          navController.navigate("Home/{wagner}")
+                },
                 modifier = Modifier
                     .width(303.dp)
                     .height(50.dp),
@@ -253,14 +273,14 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
 
 
-@Composable
-fun Greeting(name: String) {
+fun isEmailValid(email: String): Boolean {
+    // Implement your own email validation logic here
+    val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+    return email.matches(emailRegex)
 }
 
 @Preview
 @Composable
-
-
 fun LoginScreenPreview() {
     val loginScreenViewModel = LoginScreenViewModel()
     LoginScreen(loginScreenViewModel = loginScreenViewModel, navController = rememberNavController())

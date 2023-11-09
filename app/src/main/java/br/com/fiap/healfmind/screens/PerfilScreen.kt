@@ -402,7 +402,9 @@ fun PerfilScreen(navController: NavController?) {
                 Spacer(modifier = Modifier.height(25.dp))
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        navController?.navigate("Login")
+                    },
                     modifier = Modifier
                         .width(303.dp)
                         .height(50.dp),

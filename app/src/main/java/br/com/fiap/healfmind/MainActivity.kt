@@ -11,7 +11,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import br.com.fiap.healfmind.data.dataMeditacao
 import br.com.fiap.healfmind.screens.CadastroScreen
@@ -40,6 +42,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxHeight()
                         .fillMaxWidth(),
                     color = MaterialTheme.colorScheme.background,
+
                     )
                 {
 

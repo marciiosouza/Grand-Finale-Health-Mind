@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "umlupFjxGulVNm86D0kW3DF9IHKy77mmyiICpkQK5Xpuy2NNxHOCt90te+N+1b/eXENjqXW4yXyFjg5qpCVeEg==",
+  "dgSpecHash": "NK/PZxRYspbt18iyxjKfK+EaJYv5dAQ14Udm2GA3WUt/lV1kt9sSinBCGG/ZNasu8LavFSnBr5+amyFuX5wRFg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wagne\\Desktop\\healfMind-4bd632fb30744c9564d26a88aad62171568a3125\\apiHealthMind\\apiHealthMind\\apiHealthMind.csproj",
+  "projectFilePath": "C:\\Users\\wagne\\Desktop\\Nova pasta (3)\\app_healfMind\\apiHealthMind\\apiHealthMind\\apiHealthMind.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wagne\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\wagne\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",

@@ -4895,11 +4895,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wagne\\Desktop\\healfMind-4bd632fb30744c9564d26a88aad62171568a3125\\apiHealthMind\\apiHealthMind\\apiHealthMind.csproj",
+      "projectUniqueName": "C:\\Users\\wagne\\Desktop\\Nova pasta (3)\\app_healfMind\\apiHealthMind\\apiHealthMind\\apiHealthMind.csproj",
       "projectName": "apiHealthMind",
-      "projectPath": "C:\\Users\\wagne\\Desktop\\healfMind-4bd632fb30744c9564d26a88aad62171568a3125\\apiHealthMind\\apiHealthMind\\apiHealthMind.csproj",
+      "projectPath": "C:\\Users\\wagne\\Desktop\\Nova pasta (3)\\app_healfMind\\apiHealthMind\\apiHealthMind\\apiHealthMind.csproj",
       "packagesPath": "C:\\Users\\wagne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wagne\\Desktop\\healfMind-4bd632fb30744c9564d26a88aad62171568a3125\\apiHealthMind\\apiHealthMind\\obj\\",
+      "outputPath": "C:\\Users\\wagne\\Desktop\\Nova pasta (3)\\app_healfMind\\apiHealthMind\\apiHealthMind\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wagne\\AppData\\Roaming\\NuGet\\NuGet.Config",
