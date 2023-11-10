@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberAnimatedNavController()
 
-            MainScreen()
+            //MainScreen()
 
             HealfMindTheme {
                 Surface(

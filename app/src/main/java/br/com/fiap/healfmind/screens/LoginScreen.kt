@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.AlertDialogDefaults.containerColor
@@ -92,6 +93,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
     }
 
 
+
+
     Box(modifier = Modifier
         .background(
             Brush.linearGradient(
@@ -132,6 +135,11 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             )
 
             Spacer(modifier = Modifier.height(38.dp))
+            Column(
+                //Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
 
             OutlinedTextField(modifier = Modifier
                 .width(303.dp)
@@ -167,8 +175,14 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             )
             if (!isEmailValid) {
                 Text(
+
                     text = "Por favor, insira um e-mail válido.",
-                    color = Color.Red
+                    Modifier
+                        .padding(top = 2.dp, start = 40.dp)
+                        .fillMaxWidth(),
+                    color = Color.Red,
+
+
                 )
             }
             Spacer(modifier = Modifier.height(17.dp))
@@ -185,6 +199,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 value = senha,
                 onValueChange = {
                                 loginScreenViewModel.onPasswordChanged(it)
+
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password) ,
                 placeholder = {
@@ -220,7 +235,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             ) {
                 Text(text = "Entrar")
             }
-
+            }
             Spacer(modifier = Modifier.height(17.dp))
 
             Button(
@@ -254,9 +269,13 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                TextButton(onClick = { /*TODO*/ }) {
+                TextButton(onClick = {
+                    navController.navigate("Cadastro")
+                }) {
+                    
                     Text(
                         text = "Criar conta com e-mail",
+
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontFamily = FontFamily(Font(R.font.inter_regular)),
@@ -273,11 +292,6 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
 
 
-fun isEmailValid(email: String): Boolean {
-    // Implement your own email validation logic here
-    val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
-    return email.matches(emailRegex)
-}
 
 @Preview
 @Composable

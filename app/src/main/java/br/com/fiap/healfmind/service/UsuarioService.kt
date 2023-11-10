@@ -3,6 +3,7 @@ package br.com.fiap.healfmind.service
 import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.model.Usuarios
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -21,11 +22,7 @@ interface UsuarioService {
     @GET
     fun getMeditacoes(): Call<List<Meditacao>>
 
-    @FormUrlEncoded
-    @POST("/cadastrar")
-    fun inserirUsuario(
-        @Field("nome") nome: String,
-        @Field("email") email: String,
-        @Field("senha") senha: String
-    ): Call<Usuarios>
+
+    @POST("cadastrar")
+    fun inserirUsuario( @Body usuario : Usuarios ): Call<Usuarios>
 }

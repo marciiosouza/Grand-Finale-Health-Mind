@@ -9,36 +9,36 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-    Scaffold (
-        bottomBar = {}
-    ) {
-        BottomNavGraph(navController = navController)
-    }
-}
-
-@Composable
-fun BottomBar(navController: NavHostController) {
-    val screens = listOf(
-        BottomBarScreen.Home,
-    )
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-
-    BottomNavigation {
-        screens.forEach {
-            screen ->
-        }
-
-    }
-}
-
-@Composable
-fun RowScope.AddItem() {
-    val screen = Unit
-    screen: BottomBarScreen,
-}
+//
+//@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+//@Composable
+//fun MainScreen() {
+//    val navController = rememberNavController()
+//    Scaffold (
+//        bottomBar = {}
+//    ) {
+//        BottomNavGraph(navController = navController)
+//    }
+//}
+//
+//@Composable
+//fun BottomBar(navController: NavHostController) {
+//    val screens = listOf(
+//        BottomBarScreen.Home,
+//    )
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentDestination = navBackStackEntry?.destination
+//
+////    BottomNavigation {
+////        screens.forEach {
+////            screen ->
+////        }
+////
+////    }
+//}
+//
+//
+////fun RowScope.AddItem() {
+////    val screen = Unit
+////    screen: BottomBarScreen,
+////}

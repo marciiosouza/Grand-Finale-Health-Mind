@@ -119,8 +119,10 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 )
                 .border(0.dp, Color.Transparent),
 
-                value = "",
-                onValueChange = { },
+                value = nome,
+                onValueChange = {
+                                cadastroScreenViewModel.onNameChanged(it)
+                },
 
                 placeholder = {
                     Text(
@@ -150,8 +152,10 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 )
                 .border(0.dp, Color.Transparent),
 
-                value = "",
-                onValueChange = { },
+                value = email,
+                onValueChange = {
+                                cadastroScreenViewModel.onEmailChanged(it)
+                },
 
                 placeholder = {
                     Text(
@@ -181,8 +185,10 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 )
                 .border(0.dp, Color.Transparent),
 
-                value = "",
-                onValueChange = { },
+                value = senha,
+                onValueChange = {
+                                cadastroScreenViewModel.onSenhaChanged(it)
+                },
 
                 placeholder = {
                     Text(
@@ -204,7 +210,24 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(17.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    val usuario = Usuarios(0, nome = nome , senha =  senha , email = email)
+                    val call = RetrofitFactory().getUsuarioService().inserirUsuario(usuario)
+
+                    call.enqueue(object : Callback<Usuarios>{
+                        override fun onResponse(
+                            call: Call<Usuarios>,
+                            response: Response<Usuarios>
+                        ) {
+                            Log.i("C#", "onResponse:${response.body()} ")
+                        }
+
+                        override fun onFailure(call: Call<Usuarios>, t: Throwable) {
+                            Log.i("C$#", "onFailure: ${t.message}")
+                        }
+
+                    })
+                },
                 modifier = Modifier
                     .width(303.dp)
                     .height(50.dp),
@@ -220,7 +243,9 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(17.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+
+                },
                 modifier = Modifier
                     .width(303.dp)
                     .height(50.dp),
@@ -252,14 +277,10 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
 }
 
 
-@Composable
-fun Greeting(name: String) {
-}
+
 
 @Preview
 @Composable
-
-
 fun LoginScreenPreview() {
     val cadastroScreenViewModel = CadastroScreenViewModel()
     CadastroScreen(cadastroScreenViewModel = cadastroScreenViewModel, navController = rememberNavController())
