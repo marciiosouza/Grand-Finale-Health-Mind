@@ -13,10 +13,9 @@ import retrofit2.http.Path
 interface UsuarioService {
 
 
-    @GET("{email}/{senha}")
+    @POST("/login")
     fun getUsuarioByEmailSenha(
-        @Path("email") email: String,
-        @Path("senha") senha: String
+        @Body usuario : Usuarios
     ): Call<Usuarios>
 
     @GET
@@ -25,4 +24,6 @@ interface UsuarioService {
 
     @POST("cadastrar")
     fun inserirUsuario( @Body usuario : Usuarios ): Call<Usuarios>
+
+
 }

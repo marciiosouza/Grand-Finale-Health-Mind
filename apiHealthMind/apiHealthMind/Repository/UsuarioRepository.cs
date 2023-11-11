@@ -1,5 +1,6 @@
 ﻿using apiHealthMind.Context;
 using apiHealthMind.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace apiHealthMind.Repository
 {
@@ -16,6 +17,12 @@ namespace apiHealthMind.Repository
         {
             dataBaseContext.usuario.Add(usuario);
             dataBaseContext.SaveChanges();
+        }
+
+        public UsuarioModel buscaUsuario(String email , String senha)
+        {
+            var usuario = dataBaseContext.usuario.SingleOrDefault(i => i.email == email && i.senha == senha);
+            return usuario;
         }
     }
 }

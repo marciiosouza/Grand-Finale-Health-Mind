@@ -7,7 +7,7 @@ namespace apiHealthMind.Controllers
 {
     [Route("/usuario")]
     [ApiController]
-    public class UsuarioController
+    public class UsuarioController : ControllerBase
     {
         private readonly UsuarioRepository usuarioRepository;
 
@@ -26,11 +26,25 @@ namespace apiHealthMind.Controllers
             }
             catch (Exception ex)
             {
-                return new JsonResult(ex.ToString());
+                return BadRequest("Não é possível cadastrar usuario");
 
             }
 
 
+        }
+
+        [HttpPost("/login")]
+        public ActionResult<UsuarioModel> ObterUsuarioCadastrado( [FromBody] UsuarioModel usuarioModel) 
+        {
+            try
+            {
+                var usuarioCadastrado = usuarioRepository.buscaUsuario(usuarioModel.email , usuarioModel.senha);
+
+                return Ok(usuarioCadastrado);
+            }catch(Exception ex)
+            {
+                return BadRequest("Usuario não encontrado");
+            }
         }
     }
 }

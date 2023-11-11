@@ -1,6 +1,4 @@
 using apiHealthMind.Context;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +12,6 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseOracle(connectionString).EnableSensitiveDataLogging(true));
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,11 +20,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
-
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

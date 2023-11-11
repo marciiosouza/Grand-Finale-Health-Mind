@@ -219,7 +219,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                             call: Call<Usuarios>,
                             response: Response<Usuarios>
                         ) {
-                            Log.i("C#", "onResponse:${response.body()} ")
+                            navController.navigate("Login")
                         }
 
                         override fun onFailure(call: Call<Usuarios>, t: Throwable) {

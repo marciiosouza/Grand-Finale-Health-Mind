@@ -223,7 +223,26 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
             Button(
                 onClick = {
-                          navController.navigate("Home/{wagner}")
+                        val usuarioCadastro = Usuarios(0 , "", texto, senha)
+                        val call = RetrofitFactory().getUsuarioService().getUsuarioByEmailSenha(usuarioCadastro)
+
+                        call.enqueue(object : Callback<Usuarios> {
+                            override fun onResponse(
+                                call: Call<Usuarios>,
+                                response: Response<Usuarios>
+                            ) {
+                                if(response.isSuccessful){
+
+                                    navController.navigate("Home/${response.body()?.nome}")
+                                }
+                            }
+
+                            override fun onFailure(call: Call<Usuarios>, t: Throwable) {
+                                Log.i("DeuErrado", "onFailure:${t.message} ")
+                            }
+
+                        })
+                          //
                 },
                 modifier = Modifier
                     .width(303.dp)
@@ -239,7 +258,9 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             Spacer(modifier = Modifier.height(17.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+
+                },
                 modifier = Modifier
                     .width(303.dp)
                     .height(50.dp),

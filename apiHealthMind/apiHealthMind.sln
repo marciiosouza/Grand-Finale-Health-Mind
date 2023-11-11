@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "apiHealthMind", "apiHealthMind\apiHealthMind.csproj", "{FB44D280-1C20-4BF9-9D4B-A3CDCCE99BAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiHealthMind", "apiHealthMind\apiHealthMind.csproj", "{70542438-08C1-4192-8B4E-75BA51098FC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FB44D280-1C20-4BF9-9D4B-A3CDCCE99BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB44D280-1C20-4BF9-9D4B-A3CDCCE99BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB44D280-1C20-4BF9-9D4B-A3CDCCE99BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB44D280-1C20-4BF9-9D4B-A3CDCCE99BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70542438-08C1-4192-8B4E-75BA51098FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70542438-08C1-4192-8B4E-75BA51098FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70542438-08C1-4192-8B4E-75BA51098FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70542438-08C1-4192-8B4E-75BA51098FC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1CAF83C2-CDCC-47D9-80E4-6642DD594292}
+		SolutionGuid = {08314817-1B72-40A8-A9B1-AEE712A493A0}
 	EndGlobalSection
 EndGlobal
