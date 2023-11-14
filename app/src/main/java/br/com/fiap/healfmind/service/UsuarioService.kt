@@ -18,8 +18,7 @@ interface UsuarioService {
         @Body usuario : Usuarios
     ): Call<Usuarios>
 
-    @GET
-    fun getMeditacoes(): Call<List<Meditacao>>
+
 
 
     @POST("cadastrar")

@@ -31,6 +31,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.fiap.healfmind.model.Meditacao
+import br.com.fiap.healfmind.service.RetrofitFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 @Composable
@@ -70,7 +75,7 @@ fun CardHome(titulo: String , caminhoImagem : Int , navController: NavController
                     .width(29.42029.dp)
                     .height(30.dp)
                     .clickable(onClick = {
-                        Log.i("TAG2", rota3)
+
                         navController.navigate(rota3)
                     })
             )

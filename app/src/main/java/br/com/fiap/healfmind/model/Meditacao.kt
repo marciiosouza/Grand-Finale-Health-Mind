@@ -1,8 +1,9 @@
 package br.com.fiap.healfmind.model
 
 data class Meditacao (
+    val meditacaoId : Int,
     val titulo: String ,
-    val url: String
+    val caminhoArquivo: String
 
 )
 

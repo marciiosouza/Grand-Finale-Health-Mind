@@ -231,10 +231,15 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                                 call: Call<Usuarios>,
                                 response: Response<Usuarios>
                             ) {
-                                if(response.isSuccessful){
+                                //if (response.isSuccessful){
 
-                                    navController.navigate("Home/${response.body()?.nome}")
-                                }
+                                    val respostaApi = response.body()
+                                    if(respostaApi != null){
+
+                                        navController.navigate("Home/${response.body()?.nome}")
+                                    }
+                               // }
+
                             }
 
                             override fun onFailure(call: Call<Usuarios>, t: Throwable) {

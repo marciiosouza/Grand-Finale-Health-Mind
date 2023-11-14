@@ -21,6 +21,7 @@ import br.com.fiap.healfmind.screens.HomeScreen
 import br.com.fiap.healfmind.screens.MarcarConsultaScreen
 import br.com.fiap.healfmind.screens.MeditacoesScreen
 import br.com.fiap.healfmind.screens.PerfilScreen
+import br.com.fiap.healfmind.screens.VideoPlayerScreen
 import br.com.fiap.healfmind.ui.theme.HealfMindTheme
 import br.com.fiap.healfmind.viewModel.CadastroScreenViewModel
 import br.com.fiap.healfmind.viewModel.MarcarConsultaScreenViewModel
@@ -86,7 +87,10 @@ class MainActivity : ComponentActivity() {
                             MarcarConsultaScreen(MarcarConsultaScreenViewModel()  )
                         }
                         composable(route = "Meditacoes"){
-                            MeditacoesScreen(meditacoes = dataMeditacao , navController)
+                            MeditacoesScreen( navController)
+                        }
+                        composable(route = "VideoMeditacao"){
+                            VideoPlayerScreen()
                         }
                     }
                 }

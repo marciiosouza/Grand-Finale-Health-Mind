@@ -1,5 +1,6 @@
 package br.com.fiap.healfmind.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,11 +13,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,21 +46,26 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.BottomNav
 import br.com.fiap.healfmind.components.BottonNavScreen
 import br.com.fiap.healfmind.components.Header
 import com.example.healf_mind.components.CardHome
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(nome: String , navController: NavController) {
     var pesquisa by remember {
         mutableStateOf("")
     }
 
-    Column(modifier = Modifier
-        .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+
+        ){
         Header(navController = navController)
         Column(
             modifier = Modifier
@@ -193,7 +202,7 @@ fun HomeScreen(nome: String , navController: NavController) {
             ) {
                 CardHome(titulo = "Marcar\nconsulta" , caminhoImagem = R.drawable.doutor2 , navController , "MarcarConsulta")
                 CardHome(titulo = "Meditações" , caminhoImagem = R.drawable.consulta2,navController , "Meditacoes")
-                CardHome(titulo = "Sono" , caminhoImagem = R.drawable.clinica2,navController , "")
+                CardHome(titulo = "Sono" , caminhoImagem = R.drawable.clinica2,navController , "VideoMeditacao")
             }
             Text(
                 text = "Parceiros com desconto",
@@ -268,6 +277,11 @@ fun HomeScreen(nome: String , navController: NavController) {
                 }
             }
             //BottonNavScreen()
+            Scaffold(
+                bottomBar = {
+                    BottomNav(navController)
+                },
+            ) {}
         }
     }
 }

@@ -1,6 +1,8 @@
 package br.com.fiap.healfmind.screens
 
+import android.util.Log
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,6 +17,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -33,10 +40,36 @@ import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.components.MeditacoesItem
 import br.com.fiap.healfmind.data.dataMeditacao
 import br.com.fiap.healfmind.model.Meditacao
+import br.com.fiap.healfmind.service.RetrofitFactory
 import com.example.healf_mind.components.CaixaDeEntrada
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
-fun MeditacoesScreen( meditacoes: List<Meditacao>, navController: NavController) {
+//fun MeditacoesScreen( meditacoes: List<Meditacao>, navController: NavController) {
+fun MeditacoesScreen(  navController: NavController) {
+    var meditacoes by remember { mutableStateOf<List<Meditacao>>(emptyList()) }
+    LaunchedEffect(true) {
+        val call = RetrofitFactory()
+            .getMeditacoesService()
+            .getMeditacoes()
+        call.enqueue(object : Callback<List<Meditacao>> {
+            override fun onResponse(
+                call: Call<List<Meditacao>>,
+                response: Response<List<Meditacao>>
+            ) {
+                Log.i("b1221", "onResponse:${response.body()} ")
+                meditacoes = response.body()?: emptyList()
+            }
+
+            override fun onFailure(call: Call<List<Meditacao>>, t: Throwable) {
+                Log.i("x1232", "onFailure:${t.message} ")
+            }
+
+        })
+
+    }
     Column (Modifier.padding(bottom = 30.dp)){
         Header(navController = navController)
 
@@ -76,7 +109,7 @@ fun MeditacoesScreen( meditacoes: List<Meditacao>, navController: NavController)
             contentPadding = PaddingValues(horizontal = 15.dp)
             ){
             items(meditacoes) {
-                    p -> MeditacoesItem(meditacao = p)
+                    p -> MeditacoesItem(meditacao = p , navController)
 
             }
         }
@@ -93,14 +126,16 @@ fun MeditacoesScreen( meditacoes: List<Meditacao>, navController: NavController)
                 LazyVerticalGrid(
 
                     columns = GridCells.Adaptive(minSize = 130.dp),
-                    //modifier = Modifier.padding(start = 16.dp , end = 16.dp),
+
                     //contentPadding = PaddingValues(horizontal = 15.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ){
                     for(meditacao in meditacoes){
                         item{
-                            MeditacoesItem(meditacao = meditacao)
+                            val meditacaoItem = Meditacao(meditacao.meditacaoId, meditacao.titulo , meditacao.caminhoArquivo)
+                            MeditacoesItem(meditacao = meditacao , navController )
+
 
                         }
 
@@ -124,5 +159,5 @@ fun MeditacoesScreen( meditacoes: List<Meditacao>, navController: NavController)
 @Composable
 fun MeditacoesScreenPreview(){
 
-    MeditacoesScreen(meditacoes = dataMeditacao , navController = rememberNavController())
+    MeditacoesScreen( navController = rememberNavController())
 }

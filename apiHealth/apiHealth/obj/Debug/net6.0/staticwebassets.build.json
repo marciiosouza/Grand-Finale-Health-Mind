@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "QVibQtYjSIumereMeR5pk8Q2JTtErjUHDpUuOuQNdMY=",
+  "Source": "apiHealth",
+  "BasePath": "_content/apiHealth",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
