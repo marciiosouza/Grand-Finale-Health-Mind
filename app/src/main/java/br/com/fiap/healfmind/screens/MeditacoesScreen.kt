@@ -1,6 +1,8 @@
 package br.com.fiap.healfmind.screens
 
 import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,7 +18,12 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -46,9 +55,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-//fun MeditacoesScreen( meditacoes: List<Meditacao>, navController: NavController) {
-fun MeditacoesScreen(  navController: NavController) {
+fun MeditacoesScreen( meditacoes: List<Meditacao>, navController: NavController) {
+//fun MeditacoesScreen(  navController: NavController) {
     var meditacoes by remember { mutableStateOf<List<Meditacao>>(emptyList()) }
     LaunchedEffect(true) {
         val call = RetrofitFactory()
@@ -71,27 +82,64 @@ fun MeditacoesScreen(  navController: NavController) {
 
     }
     Column (Modifier.padding(bottom = 30.dp)){
-        Header(navController = navController)
 
-    Spacer(Modifier)
+    Header(navController = navController)
+
+
+
     Column (
             Modifier.padding(start = 16.dp , end = 16.dp )
         ){
-            CaixaDeEntrada(
-                label = "Pesquisar",
-                placeholder = "Pesquisr" ,
-                value = "Pesquisar",
-                keyboardType = KeyboardType.Text,
-                modifier = Modifier
-                    .shadow(
-                        elevation = 4.dp,
-                        spotColor = Color(0x1A000000),
-                        ambientColor = Color(0x1A000000)
-                    )
-                    .width(360.dp),
-                atualizarValor = {},
-                error = false
+        Spacer(modifier = Modifier.height(12.dp))
+
+        TextField(modifier = Modifier
+            .width(350.dp)
+            .height(50.dp)
+            .background(
+                color = Color(0xFFFAFAFA),
+                shape = RoundedCornerShape(size = 10.dp)
             )
+            .border(
+                width = 1.dp, color = Color(0xFFC3C3C3),
+                shape = RoundedCornerShape(size = 10.dp)
+            ),
+
+            value = "",
+            onValueChange = { },
+            placeholder = {
+                Text(
+                    text = "",
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.inter_regular)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0x4A000000),
+                    )
+                )
+            },
+            leadingIcon = {
+                Image(
+                    painter = painterResource(id = R.drawable.search),
+                    contentDescription = "Icone editar",
+                    modifier = Modifier
+                        .width(14.dp)
+                        .height(14.dp)
+                )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.Transparent,
+            )
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+
+
+
+        Card (){
+
+            }
             Text(
                 text = "Aprenda a meditar",
                 style = TextStyle(
@@ -159,5 +207,5 @@ fun MeditacoesScreen(  navController: NavController) {
 @Composable
 fun MeditacoesScreenPreview(){
 
-    MeditacoesScreen( navController = rememberNavController())
+    MeditacoesScreen( meditacoes = dataMeditacao, navController = rememberNavController())
 }

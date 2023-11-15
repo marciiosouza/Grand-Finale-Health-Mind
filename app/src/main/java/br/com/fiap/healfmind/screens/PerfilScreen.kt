@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 
@@ -66,42 +67,10 @@ fun PerfilScreen(navController: NavController?) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(110.dp)
-                    .background(colorResource(id = R.color.azul)),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-
-            ) {
-                IconButton(onClick = {
-                   // navController.navigate("Home/{nome}")
-                }) {
-                    Image(
-                        painter = painterResource(id = R.drawable.arrow),
-                        contentDescription = "Seta para esquerda",
-                        modifier = Modifier.size(15.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.width(48.dp))
-                Text(
-                    text = "Meu Perfil",
-                    color = colorResource(id = R.color.white),
-                    fontFamily = FontFamily(Font(R.font.inter_bold))
-                )
-                Spacer(modifier = Modifier.width(64.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.jovem_profile),
-                    contentDescription = "Imagem de uma jovem",
-                    modifier = Modifier
-                        .size(50.dp)
-                        .clip(shape = CircleShape),
-                    contentScale = ContentScale.Crop
-                )
+            if (navController != null) {
+                Header(navController)
             }
 
-            // Formulário
 
             Column(modifier = Modifier
                 .padding(32.dp)

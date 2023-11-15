@@ -21,3 +21,4 @@ val ColorWhite = Color(0xFFFFFFFF)
 
 val blue_gradient = Color(0xFF005FFF)
 val purple_gradient = Color(0xFF5200FF)
+val purple_banner = Color(0xFF5200FF)

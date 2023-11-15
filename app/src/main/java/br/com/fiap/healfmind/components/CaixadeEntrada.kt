@@ -31,7 +31,8 @@ fun CaixaDeEntrada(
         placeholder = {
             Text(text = placeholder)
         },
-        shape = RoundedCornerShape(30.dp),
+
+        shape = RoundedCornerShape(5.dp),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         isError = error
     )

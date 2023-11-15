@@ -9,5 +9,6 @@ data class Usuarios(
     var id : Long = 0,
     var nome : String = "",
     var email : String = "",
-    var senha : String = ""
+    var senha : String = "",
+    //var fotoPerfil: String
 )

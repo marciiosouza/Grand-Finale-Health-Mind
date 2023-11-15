@@ -52,6 +52,7 @@ fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
             Box() {
 //                    Image(painter = painterResource(id = meditacao.url), contentDescription = null )
                 AsyncImage(
+
                     model = meditacao.caminhoArquivo,
                     contentDescription = null,
                     Modifier
