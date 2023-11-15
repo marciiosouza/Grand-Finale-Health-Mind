@@ -10,5 +10,5 @@ data class Usuarios(
     var nome : String = "",
     var email : String = "",
     var senha : String = "",
-    //var fotoPerfil: String
+    var fotoPerfil: String
 )

@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.screens.VideoPlayerScreen
@@ -34,13 +35,13 @@ import retrofit2.Response
 @Composable
 fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
     Surface(
-        shape = RoundedCornerShape(25.dp),
+        shape = RoundedCornerShape(10.dp),
         shadowElevation = 4.dp
     ) {
         Column(
             Modifier
-                .height(130.dp)
-                .width(130.dp)
+                .height(200.dp)
+                .width(160.dp)
                 .clickable {
                     navController.navigate("VideoMeditacao")
                 }
@@ -90,12 +91,17 @@ fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
 //                    })
 
 
-//@Preview(showBackground =  true)
-//@Composable
-//fun MeditacoesItemPreview(){
-//
-//    MeditacoesItem( Meditacao(
-//        titulo = "Teste",
-//        url = "http://pt.hdwall365.com/wallpapers/1512/Winter-sunrise-lake-ice-snow-beautiful-scenery_1280x1024_wallpaper.jpg"
-//    ) )
-//}
+@Preview()
+@Composable
+fun MeditacoesItemPreview(){
+
+    MeditacoesItem(
+        meditacao = Meditacao(
+            1,
+            "teste",
+            "http://pt.hdwall365.com/wallpapers/1512/Winter-sunrise-lake-ice-snow-beautiful-scenery_1280x1024_wallpaper.jpg"
+        ),
+        navController = rememberNavController()
+    )
+}
+

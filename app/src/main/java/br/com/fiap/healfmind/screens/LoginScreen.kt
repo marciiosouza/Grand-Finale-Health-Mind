@@ -236,7 +236,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                                     val respostaApi = response.body()
                                     if(respostaApi != null){
 
-                                        navController.navigate("Home/${response.body()?.nome}")
+                                        //navController.navigate("Home/${response.body()?.nome}")
+                                        navController.navigate("Meditacoes")
                                     }
                                // }
 

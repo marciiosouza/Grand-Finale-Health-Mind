@@ -49,12 +49,13 @@ import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.components.BottomNav
 import br.com.fiap.healfmind.components.BottonNavScreen
 import br.com.fiap.healfmind.components.Header
+import br.com.fiap.healfmind.model.Usuarios
 import com.example.healf_mind.components.CardHome
 
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
 @Composable
-fun HomeScreen(nome: String , navController: NavController) {
+fun HomeScreen(nome: String , navController: NavController , usuario: Usuarios) {
     var pesquisa by remember {
         mutableStateOf("")
     }
@@ -201,8 +202,8 @@ fun HomeScreen(nome: String , navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 CardHome(titulo = "Marcar\nconsulta" , caminhoImagem = R.drawable.doutor2 , navController , "MarcarConsulta")
-                CardHome(titulo = "Meditações" , caminhoImagem = R.drawable.consulta2,navController , "Meditacoes")
-                CardHome(titulo = "Sono" , caminhoImagem = R.drawable.clinica2,navController , "VideoMeditacao")
+                CardHome(titulo = "Meditações" , caminhoImagem = R.drawable.consulta2,navController , "Login")
+                CardHome(titulo = "Sono" , caminhoImagem = R.drawable.clinica2,navController , "Meditacoes")
             }
             Text(
                 text = "Parceiros com desconto",
@@ -277,11 +278,7 @@ fun HomeScreen(nome: String , navController: NavController) {
                 }
             }
             //BottonNavScreen()
-            Scaffold(
-                bottomBar = {
-                    BottomNav(navController)
-                },
-            ) {}
+
         }
     }
 }
@@ -291,6 +288,6 @@ fun HomeScreen(nome: String , navController: NavController) {
 @Preview(showSystemUi =  true , showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen("Wagner" , navController = rememberNavController())
+    HomeScreen("Wagner" , navController = rememberNavController() , usuario = Usuarios(1,"Wagner" , "teste" , "1234560" , "jpg"))
 }
 

@@ -41,9 +41,9 @@ fun Header(navController:NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .height(85.dp)
-            .background(purple_gradient ),
+            .background(purple_gradient ).padding(start = 20.dp , end = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.SpaceBetween
 
     ) {
         IconButton(onClick = {
@@ -55,14 +55,12 @@ fun Header(navController:NavController) {
                 modifier = Modifier.size(32.dp)
             )
         }
-        Spacer(modifier = Modifier.width(48.dp))
         Text(
             text = "Meu Perfil",
             color = colorResource(id = R.color.white),
             fontFamily = FontFamily(Font(R.font.poppins_semibold)),
             fontSize = 18.sp
         )
-        Spacer(modifier = Modifier.width(64.dp))
         Image(
             painter = painterResource(id = R.drawable.perfil),
             contentDescription = "Imagem de uma jovem",
