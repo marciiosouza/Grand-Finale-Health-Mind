@@ -28,6 +28,9 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -55,7 +58,6 @@ import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 import br.com.fiap.healfmind.viewModel.CadastroScreenViewModel
-import com.example.healf_mind.components.CaixaDeEntrada
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,6 +69,9 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
     val nome by cadastroScreenViewModel.nome.observeAsState(initial = "")
     val email by cadastroScreenViewModel.email.observeAsState(initial = "")
     val senha by cadastroScreenViewModel.senha.observeAsState(initial = "")
+    var fotoPerfil by remember {
+        mutableStateOf("")
+    }
     val context = LocalContext.current
     val usuarioRepository = UsuarioRepository(context)
 
@@ -211,7 +216,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
 
             Button(
                 onClick = {
-                    val usuario = Usuarios(0, nome = nome , senha =  senha , email = email)
+                    val usuario = Usuarios(0, nome = nome , senha =  senha , email = email , fotoPerfil = fotoPerfil)
                     val call = RetrofitFactory().getUsuarioService().inserirUsuario(usuario)
 
                     call.enqueue(object : Callback<Usuarios>{

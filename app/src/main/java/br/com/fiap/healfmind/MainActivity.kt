@@ -3,6 +3,7 @@ package br.com.fiap.healfmind
 import LoginScreen
 import LoginScreenViewModel
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContentScope
@@ -11,11 +12,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import br.com.fiap.healfmind.data.dataMeditacao
+import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.screens.CadastroScreen
 import br.com.fiap.healfmind.screens.HomeScreen
 import br.com.fiap.healfmind.screens.MarcarConsultaScreen
@@ -53,6 +57,7 @@ class MainActivity : ComponentActivity() {
 
                     )
                 {
+                    var usuario by remember { mutableStateOf(Usuarios(0, "", "", "", "")) }
 
                     AnimatedNavHost(
                         navController = navController,
@@ -64,32 +69,42 @@ class MainActivity : ComponentActivity() {
                             ) + fadeOut(animationSpec = tween(1000))
                         },
                         enterTransition = {
-                            slideIntoContainer(towards = AnimatedContentScope.SlideDirection.Down,
+                            slideIntoContainer(
+                                towards = AnimatedContentScope.SlideDirection.Down,
                                 tween(1000)
                             )
                         }
-                    ){
-                        composable(route = "Login"){
-                            LoginScreen( LoginScreenViewModel() ,navController)
+                    ) {
+
+                        composable(route = "Login") {
+                            //var usuario by remember { mutableStateOf(Usuarios(0, "", "", "", "")) }
+                            LoginScreen(LoginScreenViewModel(), navController, usuario) { it ->
+
+                                usuario = it
+                                Log.i("MainAct", "onCreate:${usuario} ")
+                            }
                         }
-                        composable(route = "Home/{nome}"){
-                            var nome = it.arguments?.getString("nome")
-                            HomeScreen(nome!!, navController ) // double bang -> Tratar valoresNull
+                        composable(route = "Home") {
+                            // var nome = it.arguments?.getString("nome")
+                            HomeScreen(navController, usuario) // double bang -> Tratar valoresNull
                             //HomeScreen( ) // double bang -> Tratar valoresNull
                         }
-                        composable(route = "Perfil"){
-                            PerfilScreen( navController )
+                        composable(route = "Perfil") {
+
+                            PerfilScreen(navController, usuario)
                         }
-                        composable(route = "Cadastro"){
-                            CadastroScreen( navController , CadastroScreenViewModel() )
+                        composable(route = "Cadastro") {
+                            CadastroScreen(navController, CadastroScreenViewModel())
                         }
-                        composable(route = "MarcarConsulta"){
-                            MarcarConsultaScreen(MarcarConsultaScreenViewModel()  )
+                        composable(route = "MarcarConsulta") {
+                            MarcarConsultaScreen(MarcarConsultaScreenViewModel())
                         }
-                        composable(route = "Meditacoes"){
-                            MeditacoesScreen( navController)
+                        composable(route = "Meditacoes") {
+
+
+                            MeditacoesScreen(navController, usuario)
                         }
-                        composable(route = "VideoMeditacao"){
+                        composable(route = "VideoMeditacao") {
                             VideoPlayerScreen()
                         }
                     }

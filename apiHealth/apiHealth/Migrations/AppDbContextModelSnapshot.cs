@@ -54,6 +54,10 @@ namespace apiHealth.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
+                    b.Property<string>("fotoPerfil")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
                     b.Property<string>("nome")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");

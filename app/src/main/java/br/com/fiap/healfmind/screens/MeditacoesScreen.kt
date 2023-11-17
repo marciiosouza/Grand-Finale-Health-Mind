@@ -54,6 +54,7 @@ import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.components.MeditacoesItem
 import br.com.fiap.healfmind.data.dataMeditacao
 import br.com.fiap.healfmind.model.Meditacao
+import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 import com.example.healf_mind.components.CaixaDeEntrada
@@ -65,7 +66,8 @@ import retrofit2.Response
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MeditacoesScreen( navController: NavController) {
+fun MeditacoesScreen( navController: NavController , usuarios: Usuarios) {
+
     var meditacoes by remember { mutableStateOf<List<Meditacao>>(emptyList()) }
     LaunchedEffect(true) {
         val call = RetrofitFactory()
@@ -89,7 +91,7 @@ fun MeditacoesScreen( navController: NavController) {
     }
     Column (Modifier.padding(bottom = 30.dp)){
 
-    Header(navController = navController)
+    Header(navController = navController , usuarios)
 
 
 
@@ -190,7 +192,9 @@ fun MeditacoesScreen( navController: NavController) {
                     contentDescription = null,
                     Modifier
                         .size(15.dp)
-                        .fillMaxWidth().align(  alignment = Alignment.CenterVertically).fillMaxWidth(),
+                        .fillMaxWidth()
+                        .align(alignment = Alignment.CenterVertically)
+                        .fillMaxWidth(),
 
 
                     )
@@ -245,9 +249,9 @@ fun MeditacoesScreen( navController: NavController) {
 
 
 
-@Preview(showSystemUi =  true)
-@Composable
-fun MeditacoesScreenPreview(){
-
-    MeditacoesScreen(  navController = rememberNavController())
-}
+//@Preview(showSystemUi =  true)
+//@Composable
+//fun MeditacoesScreenPreview(){
+//
+//    MeditacoesScreen(  navController = rememberNavController())
+//}

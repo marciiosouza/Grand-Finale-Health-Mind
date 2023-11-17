@@ -1,10 +1,8 @@
 package br.com.fiap.healfmind.screens
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -20,7 +18,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,10 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -46,8 +41,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
-import br.com.fiap.healfmind.components.BottomNav
-import br.com.fiap.healfmind.components.BottonNavScreen
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.model.Usuarios
 import com.example.healf_mind.components.CardHome
@@ -55,7 +48,7 @@ import com.example.healf_mind.components.CardHome
 
 
 @Composable
-fun HomeScreen(nome: String , navController: NavController , usuario: Usuarios) {
+fun HomeScreen(  navController: NavController , usuarios: Usuarios ) {
     var pesquisa by remember {
         mutableStateOf("")
     }
@@ -67,7 +60,7 @@ fun HomeScreen(nome: String , navController: NavController , usuario: Usuarios) 
         horizontalAlignment = Alignment.CenterHorizontally,
 
         ){
-        Header(navController = navController)
+        Header(navController = navController , usuarios )
         Column(
             modifier = Modifier
                 .padding(
@@ -79,7 +72,7 @@ fun HomeScreen(nome: String , navController: NavController , usuario: Usuarios) 
                 .align(alignment = Alignment.Start)
         ){
             Text(
-                text = "Olá $nome",
+                text = "Olá ${usuarios.nome}",
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontFamily = FontFamily.SansSerif,
@@ -202,7 +195,7 @@ fun HomeScreen(nome: String , navController: NavController , usuario: Usuarios) 
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 CardHome(titulo = "Marcar\nconsulta" , caminhoImagem = R.drawable.doutor2 , navController , "MarcarConsulta")
-                CardHome(titulo = "Meditações" , caminhoImagem = R.drawable.consulta2,navController , "Login")
+                CardHome(titulo = "Meditações" , caminhoImagem = R.drawable.consulta2,navController , "Meditacoes")
                 CardHome(titulo = "Sono" , caminhoImagem = R.drawable.clinica2,navController , "Meditacoes")
             }
             Text(
@@ -288,6 +281,6 @@ fun HomeScreen(nome: String , navController: NavController , usuario: Usuarios) 
 @Preview(showSystemUi =  true , showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen("Wagner" , navController = rememberNavController() , usuario = Usuarios(1,"Wagner" , "teste" , "1234560" , "jpg"))
+    HomeScreen(navController = rememberNavController() , usuarios = Usuarios(1,"Wagner" , "teste" , "1234560" , "jpg"))
 }
 

@@ -12,9 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import br.com.fiap.healfmind.R
-import br.com.fiap.healfmind.screens.HomeScreen
+
 
 @Composable
 private fun SootheBottomNavigation(modifier: Modifier = Modifier) {

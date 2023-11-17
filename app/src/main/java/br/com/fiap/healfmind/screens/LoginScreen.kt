@@ -65,7 +65,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.model.Usuarios
-import br.com.fiap.healfmind.screens.HomeScreen
 import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.ColorWhite
 import br.com.fiap.healfmind.ui.theme.Inter
@@ -78,12 +77,15 @@ import retrofit2.Response
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavController) {
+fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavController , usuarios: Usuarios, onLoginSuccess: (Usuarios) -> Unit) {
 
     val texto by loginScreenViewModel.texto.observeAsState(initial = "")
     val senha by loginScreenViewModel.password.observeAsState(initial = "")
     var email by remember { mutableStateOf("") }
     val tamanhoMax  = 10
+    var fotoPerfil by remember {
+        mutableStateOf("")
+    }
 
     var isEmailValid by remember { mutableStateOf(true) }
 
@@ -211,6 +213,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                             fontWeight = FontWeight(400),
                             color = Color(0x4A000000),
                         )
+
                     )
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -223,7 +226,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
             Button(
                 onClick = {
-                        val usuarioCadastro = Usuarios(0 , "", texto, senha)
+
+                        val usuarioCadastro = Usuarios(0 , "", texto, senha , fotoPerfil)
                         val call = RetrofitFactory().getUsuarioService().getUsuarioByEmailSenha(usuarioCadastro)
 
                         call.enqueue(object : Callback<Usuarios> {
@@ -235,9 +239,10 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
                                     val respostaApi = response.body()
                                     if(respostaApi != null){
-
-                                        //navController.navigate("Home/${response.body()?.nome}")
-                                        navController.navigate("Meditacoes")
+                                        Log.i("Deu certo", "${respostaApi} ")
+                                        onLoginSuccess(respostaApi)
+                                        navController.navigate("Home" )
+                                        //navController.navigate("Home/${}")
                                     }
                                // }
 
@@ -320,9 +325,9 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
 
 
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    val loginScreenViewModel = LoginScreenViewModel()
-    LoginScreen(loginScreenViewModel = loginScreenViewModel, navController = rememberNavController())
-}
+//@Preview
+//@Composable
+//fun LoginScreenPreview() {
+//    val loginScreenViewModel = LoginScreenViewModel()
+//    LoginScreen(loginScreenViewModel = loginScreenViewModel, navController = rememberNavController() ,
+//}

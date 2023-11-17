@@ -76,7 +76,7 @@ fun CardHome(titulo: String , caminhoImagem : Int , navController: NavController
                     .height(30.dp)
                     .clickable(onClick = {
 
-                        navController.navigate(rota3)
+                        navController.navigate(rota)
                     })
             )
 

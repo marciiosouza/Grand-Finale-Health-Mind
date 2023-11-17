@@ -2,18 +2,14 @@ package br.com.fiap.healfmind.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,48 +29,54 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.ui.theme.purple_gradient
+import coil.compose.AsyncImage
 
 @Composable
-fun Header(navController:NavController) {
+fun Header(navController:NavController , usuarios: Usuarios) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(85.dp)
-            .background(purple_gradient ).padding(start = 20.dp , end = 20.dp),
+            .background(purple_gradient)
+            .padding(start = 20.dp, end = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
 
     ) {
-        IconButton(onClick = {
-            // navController.navigate("Home/{nome}")
-        }) {
             Image(
                 painter = painterResource(id = R.drawable.menu),
                 contentDescription = "Seta para esquerda",
                 modifier = Modifier.size(32.dp)
             )
-        }
+
         Text(
             text = "Meu Perfil",
             color = colorResource(id = R.color.white),
             fontFamily = FontFamily(Font(R.font.poppins_semibold)),
             fontSize = 18.sp
         )
-        Image(
-            painter = painterResource(id = R.drawable.perfil),
-            contentDescription = "Imagem de uma jovem",
+        AsyncImage(
+            model = usuarios.fotoPerfil,
+            contentDescription = null,
+            placeholder = painterResource(id = R.drawable.ic_launcher_background),
             modifier = Modifier
                 .size(50.dp)
-                .clip(shape = CircleShape),
+                .clip(shape = CircleShape).clickable {
+                                                     navController.navigate("Perfil")
+                },
             contentScale = ContentScale.Crop
         )
+
+        }
     }
-}
+
+
 
 
 @Preview()
 @Composable
 fun HeaderPreview() {
-    Header(navController = rememberNavController())
+    Header(navController = rememberNavController() , Usuarios(1 , "Wagner" , "teste@" , "123" , ""))
 }

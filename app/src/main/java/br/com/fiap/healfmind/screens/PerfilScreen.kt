@@ -47,17 +47,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.components.Header
+import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 //fun PerfilScreen() {
-fun PerfilScreen(navController: NavController?) {
+fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
 
-    var nome = "Marcio"
+
     Box(modifier = Modifier
         .background(
             Color.White
@@ -68,7 +70,7 @@ fun PerfilScreen(navController: NavController?) {
                 .fillMaxWidth()
         ) {
             if (navController != null) {
-                Header(navController)
+                Header(navController , usuarios )
             }
 
 
@@ -114,7 +116,7 @@ fun PerfilScreen(navController: NavController?) {
                     onValueChange = { },
                     placeholder = {
                         Text(
-                            text = "Nome Completo:",
+                            text = usuarios.nome,
                             style = TextStyle(
                                 fontSize = 12.sp,
                                 fontFamily = FontFamily(Font(R.font.inter_regular)),
@@ -234,7 +236,13 @@ fun PerfilScreen(navController: NavController?) {
                     onValueChange = { },
                     placeholder = {
                         Text(
-                            text = "E-mail:",
+
+                            text = if(usuarios != null) {
+                                usuarios.email
+                            } else {
+                                "E-mail:"
+                            },
+
                             style = TextStyle(
                                 fontSize = 12.sp,
                                 fontFamily = FontFamily(Font(R.font.inter_regular)),
@@ -400,7 +408,7 @@ fun PerfilScreen(navController: NavController?) {
 @Preview
 @Composable
 fun PerfilScreenPreview() {
-    PerfilScreen(navController = null)
+    PerfilScreen(navController = rememberNavController() , usuarios = Usuarios(1,"","","",""))
 }
 
 
