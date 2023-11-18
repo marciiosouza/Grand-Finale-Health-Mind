@@ -1,5 +1,3 @@
-import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -10,17 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -31,27 +23,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.model.Usuarios
-import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 import com.example.healf_mind.components.CaixaDeEntrada
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,7 +69,6 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
     )
 
 
-
     {
         Column(
             modifier = Modifier
@@ -95,193 +76,97 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 .padding(top = 40.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
-            Image(painter = painterResource(id = R.drawable.logo),
-                contentDescription = "",
-                modifier = Modifier
-                    .width(140.dp)
-                    .height(112.41309.dp)
-            )
-
-            Spacer(modifier = Modifier.height(80.dp))
-
-            Text(
-                text = "Faça seu Login",
-                style = TextStyle(
-                    fontSize = 22.sp,
-                    fontFamily = FontFamily(Font(R.font.inter_bold)),
-                    color = Color(0xFFFFFFFF),
-                )
-            )
-
-            Spacer(modifier = Modifier.height(38.dp))
+        )
+        {
             Column(
-                //Modifier.fillMaxWidth(),
+                Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-
-            OutlinedTextField(modifier = Modifier
-                .width(303.dp)
-                .height(50.dp)
-                .background(
-                    color = Color(0xFFFAFAFA),
-                    shape = RoundedCornerShape(size = 10.dp)
-                )
-                .border(0.dp, Color.Transparent),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                value = texto,
-                onValueChange = {
-                    loginScreenViewModel.onTextoChanged(it)
-
-                    isEmailValid = isEmailValid(texto)
-                },
-
-               placeholder = {
-                   Text(
-                       text = "Digite o seu e-mail",
-                       style = TextStyle(
-                           fontSize = 12.sp,
-                           fontFamily = FontFamily(Font(R.font.inter_regular)),
-                           fontWeight = FontWeight(400),
-                           color = Color(0x4A000000),
-                       )
-                   )
-               },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.White,
-                    unfocusedBorderColor = Color.Transparent,
-                )
             )
-            if (!isEmailValid) {
-                Text(
+            {
 
-                    text = "Por favor, insira um e-mail válido.",
-                    Modifier
-                        .padding(top = 2.dp, start = 40.dp)
-                        .fillMaxWidth(),
-                    color = Color.Red,
+                if (!isEmailValid) {
+                    Text(
+                        text = "Por favor, insira um e-mail válido.",
+                        Modifier
+                            .padding(top = 2.dp, start = 40.dp)
+                            .fillMaxWidth(),
+                        color = Color.Red,
+                    )
+                }
 
+                CaixaDeEntrada(
+                    label = "",
+                    placeholder = "E-mail",
+                    value = senha,
+                    keyboardType = KeyboardType.Email,
+                    modifier = Modifier,
+                    atualizarValor = {
+                        loginScreenViewModel.onTextoChanged(it)
+                        isEmailValid = isEmailValid("Por favor, insira um e-mail válido.")
+                    },
+                    error = true,
+                    iconImage = R.drawable.icon_email
+                )
 
+                Spacer(modifier = Modifier.height(10.dp))
+
+                CaixaDeEntrada(
+                    label = "",
+                    placeholder = "Senha",
+                    value = senha,
+                    keyboardType = KeyboardType.Password,
+                    modifier = Modifier,
+                    atualizarValor = {},
+                    error = true,
+                    iconImage = R.drawable.icon_lock
                 )
             }
-            Spacer(modifier = Modifier.height(17.dp))
 
-            CaixaDeEntrada(
-                label = "",
-                placeholder = "Senha",
-                value = senha,
-                keyboardType = KeyboardType.Password,
-                modifier = Modifier,
+            Spacer(modifier = Modifier.height(10.dp))
+
+            ButtonAccess(
                 atualizarValor = {},
-                error = true,
-                iconImage = R.drawable.icon_lock
+                navController = navController,
+                textButton = "Realizar login",
+                modifier = Modifier,
+                iconImage = 1,
+                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
+                textColor = Color.White
             )
-            Spacer(modifier = Modifier.height(17.dp))
 
-            Button(
-                onClick = {
+            Spacer(modifier = Modifier.height(10.dp))
 
-                        val usuarioCadastro = Usuarios(0 , "", texto, senha , fotoPerfil)
-                        val call = RetrofitFactory().getUsuarioService().getUsuarioByEmailSenha(usuarioCadastro)
+            ButtonAccess(
+                atualizarValor = {},
+                navController = navController,
+                textButton = "Entrar com o Google",
+                modifier = Modifier,
+                iconImage = R.drawable.icon_google,
+                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
+                textColor = Color.Black
+            )
 
-                        call.enqueue(object : Callback<Usuarios> {
-                            override fun onResponse(
-                                call: Call<Usuarios>,
-                                response: Response<Usuarios>
-                            ) {
-                                //if (response.isSuccessful){
+            Spacer(modifier = Modifier.height(10.dp))
 
-                                    val respostaApi = response.body()
-                                    if(respostaApi != null){
-                                        Log.i("Deu certo", "${respostaApi} ")
-                                        onLoginSuccess(respostaApi)
-                                        navController.navigate("Home" )
-                                        //navController.navigate("Home/${}")
-                                    }
-                               // }
-
-                            }
-
-                            override fun onFailure(call: Call<Usuarios>, t: Throwable) {
-                                Log.i("DeuErrado", "onFailure:${t.message} ")
-                            }
-
-                        })
-                          //
-                },
+            ButtonAccess(
+                atualizarValor = {},
+                navController = navController,
+                textButton = "Criar conta",
                 modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp),
-                shape = RoundedCornerShape(size = 10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.azul))
-
-            ) {
-                Text(text = "Entrar")
-            }
-            }
-            Spacer(modifier = Modifier.height(17.dp))
-
-            Button(
-                onClick = {
-
-                },
-                modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp),
-                shape = RoundedCornerShape(size = 10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.white)
-                )
-            ) {
-                    Text(
-                        text = "Entrar com o Google",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF000000)
-                        )
-                    )
-
-                    Spacer(modifier = Modifier.width(20.dp))
-
-                    Image(
-                        painter = painterResource(id = R.drawable.google),
-                        contentDescription = "Seta para esquerda",
-                        modifier = Modifier.size(15.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                TextButton(onClick = {
-                    navController.navigate("Cadastro")
-                }) {
-                    
-                    Text(
-                        text = "Criar conta com e-mail",
-
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFFFFFFFF),
-                        )
-                    )
-                }
-            }
-
-
+                    .border(width = 1.dp, color = Color(0xFFE6EFFF),
+                        shape = RoundedCornerShape(size = 5.dp)
+                    ),
+                iconImage = R.drawable.icon_google,
+                colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
+                textColor = Color.White
+            )
         }
     }
-
-
-
+}
 
 @Preview
 @Composable
+
 fun LoginScreenPreview() {
     val loginScreenViewModel = LoginScreenViewModel()
     LoginScreen(loginScreenViewModel = loginScreenViewModel, navController = rememberNavController() , usuarios = Usuarios(1 ,"Wagner Morais" , "wag@gmail", "123","teste.jpg") ,onLoginSuccess = {} )

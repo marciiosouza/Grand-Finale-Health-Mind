@@ -58,25 +58,20 @@ fun CaixaDeEntrada(
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType) ,
 
         leadingIcon = {
-            Icon(
+            Image(
                 painter = painterResource(id = iconImage),
                 contentDescription = null,
-                modifier = Modifier.padding(end = 8.dp).size(15.dp) // Ajuste o espaçamento conforme necessário
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .size(15.dp)
             )
         },
-//        Image(
-//            painter = painterResource(id = iconImage),
-//            contentDescription = "image description",
-//            contentScale = ContentScale.None
-//        ),
-
         placeholder = {
             Text(
-                text = "Digite a sua senha",
+                text = placeholder,
                 style = TextStyle(
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     fontFamily = FontFamily(Font(R.font.inter_regular)),
-                    fontWeight = FontWeight(400),
                     color = Color(0x4A000000),
                 )
             )

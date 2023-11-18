@@ -52,12 +52,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.database.repository.UsuarioRepository
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 import br.com.fiap.healfmind.viewModel.CadastroScreenViewModel
+import com.example.healf_mind.components.CaixaDeEntrada
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -94,7 +96,92 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 .padding(top = 40.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
+            Column(
+                Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            )
+            {
+                CaixaDeEntrada(
+                    label = "",
+                    placeholder = "Nome",
+                    value = senha,
+                    keyboardType = KeyboardType.Email,
+                    modifier = Modifier,
+                    atualizarValor = {},
+                    error = true,
+                    iconImage = R.drawable.icon_person
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                CaixaDeEntrada(
+                    label = "",
+                    placeholder = "E-mail",
+                    value = senha,
+                    keyboardType = KeyboardType.Email,
+                    modifier = Modifier,
+                    atualizarValor = {},
+                    error = true,
+                    iconImage = R.drawable.icon_email
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                CaixaDeEntrada(
+                    label = "",
+                    placeholder = "Senha",
+                    value = senha,
+                    keyboardType = KeyboardType.Password,
+                    modifier = Modifier,
+                    atualizarValor = {},
+                    error = true,
+                    iconImage = R.drawable.icon_lock
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            ButtonAccess(
+                atualizarValor = {},
+                navController = navController,
+                textButton = "Fazer Cadastro",
+                modifier = Modifier,
+                iconImage = 1,
+                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
+                textColor = Color.White
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            ButtonAccess(
+                atualizarValor = {},
+                navController = navController,
+                textButton = "Entrar com o Google",
+                modifier = Modifier,
+                iconImage = R.drawable.icon_google,
+                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
+                textColor = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            ButtonAccess(
+                atualizarValor = {},
+                navController = navController,
+                textButton = "Fazer login",
+                modifier = Modifier
+                    .border(width = 1.dp, color = Color(0xFFE6EFFF),
+                        shape = RoundedCornerShape(size = 5.dp)
+                    ),
+                iconImage = R.drawable.icon_google,
+                colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
+                textColor = Color.White
+            )
+        }
+
+        /*{
+
             Image(painter = painterResource(id = R.drawable.logo),
                 contentDescription = "",
                 modifier = Modifier
@@ -277,7 +364,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                     modifier = Modifier.size(20.dp)
                 )
             }
-        }
+        }*/
     }
 }
 
