@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -83,22 +84,24 @@ fun MarcarConsultaScreen( marcarConsultaScreenViewModel: MarcarConsultaScreenVie
                     ),
                 atualizarValor = {},
                 error = false,
-                iconImage = 1
+                iconImage = 1,
+                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
             )
             CaixaDeEntrada(
-                                label = "Presencia ou online",
-                            placeholder = "Presencia ou online",
-                            value = "teste",
-                            keyboardType = KeyboardType.Text,
-                            modifier = Modifier
-                                .shadow(
-                                    elevation = 4.dp,
-                                    spotColor = Color(0x1A000000),
-                                    ambientColor = Color(0x1A000000)
-                    ),
+                label = "Presencia ou online",
+                placeholder = "Presencia ou online",
+                value = "teste",
+                keyboardType = KeyboardType.Text,
+                modifier = Modifier
+                    .shadow(
+                        elevation = 4.dp,
+                        spotColor = Color(0x1A000000),
+                        ambientColor = Color(0x1A000000)
+        ),
                 atualizarValor = {},
                 error = false,
-                iconImage = 1
+                iconImage = 1,
+                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
             )
 
             TextButton(

@@ -1,7 +1,5 @@
 package com.example.healf_mind.components
 
-import android.graphics.drawable.Icon
-import android.media.Image
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,8 +9,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -24,7 +23,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,9 +38,10 @@ fun CaixaDeEntrada(
     value: String,
     keyboardType: KeyboardType,
     modifier: Modifier,
-    atualizarValor: (String) -> Unit ,// Função retorna nada
-    error : Boolean,
-    iconImage : Int
+    atualizarValor: (String) -> Unit,// Função retorna nada
+    error: Boolean,
+    iconImage: Int,
+    colorButtonColors: ButtonColors
 ) {
     OutlinedTextField(
         modifier = Modifier
@@ -86,7 +85,8 @@ fun CaixaDeEntrada(
 @Preview
 @Composable
 fun CaixaDeEntradaPreview() {
-    CaixaDeEntrada(label = "Presencia ou online",
+    CaixaDeEntrada(
+        label = "Presencia ou online",
         placeholder = "Presencia ou online",
         value = "tipoConsulta",
         keyboardType = KeyboardType.Text,
@@ -97,6 +97,6 @@ fun CaixaDeEntradaPreview() {
                 ambientColor = Color(0x1A000000)
             ),
         atualizarValor = {},
-        error = false, 1
+        error = false, 1, ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
     )
 }

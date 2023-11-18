@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -105,7 +104,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                         isEmailValid = isEmailValid("Por favor, insira um e-mail válido.")
                     },
                     error = true,
-                    iconImage = R.drawable.icon_email
+                    iconImage = R.drawable.icon_email,
+                    colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -118,7 +118,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     modifier = Modifier,
                     atualizarValor = {},
                     error = true,
-                    iconImage = R.drawable.icon_lock
+                    iconImage = R.drawable.icon_lock,
+                    colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                 )
             }
 

@@ -9,50 +9,38 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.model.Usuarios
-import br.com.fiap.healfmind.ui.theme.blue_gradient
-import br.com.fiap.healfmind.ui.theme.purple_gradient
+import com.example.healf_mind.components.CaixaDeEntrada
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,7 +61,6 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                 Header(navController , usuarios )
             }
 
-
             Column(modifier = Modifier
                 .padding(32.dp)
                 .fillMaxWidth()
@@ -86,7 +73,7 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                 Text(
                     text = "Dados Pessoais",
                     style = TextStyle(
-                        fontSize = 14.sp,
+                        fontSize = 18.sp,
                         fontFamily = FontFamily(Font(R.font.inter_bold)),
                         fontWeight = FontWeight(700),
                         color = Color(0xFF000000),
@@ -95,81 +82,48 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
 
                 Spacer(modifier = Modifier.height(26.dp))
 
-                TextField(modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp)
-                    .shadow(
-                        elevation = 4.dp,
-                        spotColor = Color(0x1A000000),
-                        ambientColor = Color(0x1A000000)
+                Box(
+                    modifier = Modifier
+                        .border(1.dp, color = Color(0xFFB5B5B5), shape = RoundedCornerShape(size = 5.dp))
+                ) {
+                    CaixaDeEntrada(
+                        label = "",
+                        placeholder = "Nome",
+                        value = "",
+                        keyboardType = KeyboardType.Email,
+                        modifier = Modifier,
+                        atualizarValor = {},
+                        error = true,
+                        iconImage = R.drawable.icon_person,
+                        colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                     )
-                    .background(
-                        color = Color(0xFFFAFAFA),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    )
-                    .border(
-                        width = 1.dp, color = Color(0xFFC3C3C3),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    ),
+                }
 
-                    value = "",
-                    onValueChange = { },
-                    placeholder = {
-                        Text(
-                            text = usuarios.nome,
-                            style = TextStyle(
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily(Font(R.font.inter_regular)),
-                                fontWeight = FontWeight(400),
-                                color = Color(0x4A000000),
-                            )
-                        )
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color.White,
-                        unfocusedBorderColor = Color.Transparent,
-                    )
-                )
+                Spacer(modifier = Modifier.height(10.dp))
 
-                Spacer(modifier = Modifier.height(12.dp))
-
-                TextField(modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp)
-                    .background(
-                        color = Color(0xFFFAFAFA),
-                        shape = RoundedCornerShape(size = 10.dp)
+                Box(
+                    modifier = Modifier
+                        .border(1.dp, color = Color(0xFFB5B5B5), shape = RoundedCornerShape(size = 5.dp))
+                ) {
+                    CaixaDeEntrada(
+                        label = "",
+                        placeholder = "CPF",
+                        value = "",
+                        keyboardType = KeyboardType.Email,
+                        modifier = Modifier,
+                        atualizarValor = {},
+                        error = true,
+                        iconImage = R.drawable.icon_person,
+                        colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                     )
-                    .border(
-                        width = 1.dp, color = Color(0xFFC3C3C3),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    ),
-
-                    value = "",
-                    onValueChange = { },
-                    placeholder = {
-                        Text(
-                            text = "CPF:",
-                            style = TextStyle(
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily(Font(R.font.inter_regular)),
-                                fontWeight = FontWeight(400),
-                                color = Color(0x4A000000),
-                            )
-                        )
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color.White,
-                        unfocusedBorderColor = Color.Transparent,
-                    )
-                )
+                }
 
                 Spacer(modifier = Modifier.height(26.dp))
 
                 Text(
-                    text = "Dados de contato",
+                    text = "Dados decontato",
                     style = TextStyle(
-                        fontSize = 14.sp,
+                        fontSize = 18.sp,
                         fontFamily = FontFamily(Font(R.font.inter_bold)),
                         fontWeight = FontWeight(700),
                         color = Color(0xFF000000),
@@ -178,149 +132,72 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
 
                 Spacer(modifier = Modifier.height(26.dp))
 
-                TextField(modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp)
-                    .background(
-                        color = Color(0xFFFAFAFA),
-                        shape = RoundedCornerShape(size = 10.dp)
+                Box(
+                    modifier = Modifier
+                        .border(1.dp, color = Color(0xFFB5B5B5), shape = RoundedCornerShape(size = 5.dp))
+                ) {
+                    CaixaDeEntrada(
+                        label = "",
+                        placeholder = "Celular",
+                        value = "",
+                        keyboardType = KeyboardType.Email,
+                        modifier = Modifier,
+                        atualizarValor = {},
+                        error = true,
+                        iconImage = R.drawable.icon_edit,
+                        colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                     )
-                    .border(
-                        width = 1.dp, color = Color(0xFFC3C3C3),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    ),
+                }
 
-                    value = "",
-                    onValueChange = { },
-                    placeholder = {
-                        Text(
-                            text = "Celular:",
-                            style = TextStyle(
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily(Font(R.font.inter_regular)),
-                                fontWeight = FontWeight(400),
-                                color = Color(0x4A000000),
-                            )
-                        )
-                    },
-                    trailingIcon = {
-                        Image(
-                            painter = painterResource(id = R.drawable.edit),
-                            contentDescription = "Icone editar",
-                            modifier = Modifier
-                                .width(14.dp)
-                                .height(14.dp)
-                        )
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color.White,
-                        unfocusedBorderColor = Color.Transparent,
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Box(
+                    modifier = Modifier
+                        .border(1.dp, color = Color(0xFFB5B5B5), shape = RoundedCornerShape(size = 5.dp))
+                ) {
+                    CaixaDeEntrada(
+                        label = "",
+                        placeholder = "E-mail",
+                        value = "",
+                        keyboardType = KeyboardType.Email,
+                        modifier = Modifier,
+                        atualizarValor = {},
+                        error = true,
+                        iconImage = R.drawable.icon_edit,
+                        colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                     )
-                )
+                }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(10.dp))
 
-                TextField(modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp)
-                    .background(
-                        color = Color(0xFFFAFAFA),
-                        shape = RoundedCornerShape(size = 10.dp)
+                Box(
+                    modifier = Modifier
+                        .border(1.dp, color = Color(0xFFB5B5B5), shape = RoundedCornerShape(size = 5.dp))
+                ) {
+                    CaixaDeEntrada(
+                        label = "",
+                        placeholder = "Endereco",
+                        value = "",
+                        keyboardType = KeyboardType.Email,
+                        modifier = Modifier,
+                        atualizarValor = {},
+                        error = true,
+                        iconImage = R.drawable.icon_edit,
+                        colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                     )
-                    .border(
-                        width = 1.dp, color = Color(0xFFC3C3C3),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    ),
-
-                    value = "",
-                    onValueChange = { },
-                    placeholder = {
-                        Text(
-
-                            text = if(usuarios != null) {
-                                usuarios.email
-                            } else {
-                                "E-mail:"
-                            },
-
-                            style = TextStyle(
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily(Font(R.font.inter_regular)),
-                                fontWeight = FontWeight(400),
-                                color = Color(0x4A000000),
-                            )
-                        )
-                    },
-                    trailingIcon = {
-                        Image(
-                            painter = painterResource(id = R.drawable.edit),
-                            contentDescription = "Icone editar",
-                            modifier = Modifier
-                                .width(14.dp)
-                                .height(14.dp)
-                        )
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color.White,
-                        unfocusedBorderColor = Color.Transparent,
-                    )
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                TextField(modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp)
-                    .background(
-                        color = Color(0xFFFAFAFA),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    )
-                    .border(
-                        width = 1.dp, color = Color(0xFFC3C3C3),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    ),
-
-                    value = "",
-                    onValueChange = { },
-                    placeholder = {
-                        Text(
-                            text = "Endereço:",
-                            style = TextStyle(
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily(Font(R.font.inter_regular)),
-                                fontWeight = FontWeight(400),
-                                color = Color(0x4A000000),
-                            )
-                        )
-                    },
-                    trailingIcon = {
-                        Image(
-                            painter = painterResource(id = R.drawable.edit),
-                            contentDescription = "Icone editar",
-                            modifier = Modifier
-                                .width(14.dp)
-                                .height(14.dp)
-                        )
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color.White,
-                        unfocusedBorderColor = Color.Transparent,
-                    )
-                )
+                }
 
                 Spacer(modifier = Modifier.height(26.dp))
 
                 Text(
                     text = "Segurança",
                     style = TextStyle(
-                        fontSize = 14.sp,
+                        fontSize = 18.sp,
                         fontFamily = FontFamily(Font(R.font.inter_bold)),
                         fontWeight = FontWeight(700),
                         color = Color(0xFF000000),
                     )
                 )
-
-                Spacer(modifier = Modifier.height(10.dp))
 
                 Row {
                     TextButton(onClick = { /*TODO*/ }) {
@@ -378,28 +255,25 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
 
                 Spacer(modifier = Modifier.height(25.dp))
 
-                Button(
-                    onClick = {
-                        navController?.navigate("Login")
-                    },
-                    modifier = Modifier
-                        .width(303.dp)
-                        .height(50.dp),
-                    shape = RoundedCornerShape(size = 10.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = colorResource(id = R.color.azul))
+                ButtonAccess(
+                    atualizarValor = {},
+                    navController = rememberNavController(),
+                    textButton = "Sair da conta",
+                    modifier = Modifier,
+                    iconImage = R.drawable.icon_exit,
+                    colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
+                    textColor = Color.White
+                )
 
-                ) {
-                    Text(text = "Sair da conta")
-
-                    Spacer(modifier = Modifier.width(8.dp))
-
-                    Image(
-                        painter = painterResource(id = R.drawable.sair),
-                        contentDescription = "Seta para esquerda",
-                        modifier = Modifier.size(14.dp)
-                    )
-                }
+                ButtonAccess(
+                    atualizarValor = {},
+                    navController = rememberNavController(),
+                    textButton = "Excluir conta",
+                    modifier = Modifier,
+                    iconImage = R.drawable.icon_delete,
+                    colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
+                    textColor = Color.Red
+                )
             }
         }
     }
