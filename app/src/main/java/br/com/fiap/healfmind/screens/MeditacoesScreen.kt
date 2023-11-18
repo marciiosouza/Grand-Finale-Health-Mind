@@ -5,7 +5,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +16,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -34,11 +38,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,6 +58,7 @@ import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.purple_gradient
+import com.example.healf_mind.components.CaixaDeEntrada
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -95,54 +102,7 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios) {
         ){
 
             Spacer(modifier = Modifier.height(12.dp))
-
-            TextField(modifier = Modifier
-                .width(350.dp)
-                .height(50.dp)
-                //.padding(15.dp)
-                .background(
-                    color = Color(0xFFFAFAFA),
-                    shape = RoundedCornerShape(size = 10.dp)
-                )
-                .border(
-                    width = 1.dp, color = Color(0xFFC3C3C3),
-                    shape = RoundedCornerShape(size = 10.dp)
-                ),
-
-                value = "",
-                onValueChange = { },
-                placeholder = {
-                    Text(
-                        text = "",
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0x4A000000),
-                        )
-                    )
-                },
-                leadingIcon = {
-                    Image(
-                        painter = painterResource(id = R.drawable.search),
-                        contentDescription = "Icone editar",
-                        modifier = Modifier
-                            .width(14.dp)
-                            .height(14.dp)
-                    )
-                },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.White,
-                    unfocusedBorderColor = Color.Transparent,
-                )
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-
-
-
-            Card (
+        Card (
                 modifier = Modifier
                     .width(350.dp)
                     .height(150.dp)
@@ -153,6 +113,7 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios) {
                 colors = CardDefaults.cardColors(purple_gradient)
             ){
                 Text(text = "Medite conosco para uma mente mais calma",
+                    Modifier.padding(top = 30.dp),
                     style = TextStyle(
                         fontSize = 21.sp,
                         lineHeight = 23.57.sp,
@@ -160,59 +121,61 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios) {
                         fontWeight = FontWeight(700),
                         color = Color(0xFFFFFFFF),
                         textAlign = TextAlign.Center),
+
                 )
             }
 
-            Button(
-                onClick = { /*TODO*/ },
 
-                Modifier
+            CaixaDeEntrada(
+                label = "",
+                placeholder = "Pesquisar",
+                value = "",
+                keyboardType = KeyboardType.Text,
+                modifier = Modifier
+                    .width(450.dp)
                     .border(
                         width = 1.dp,
-                        color = Color(0xFFFEFEFF),
-                        shape = RoundedCornerShape(size = 130.dp)
-                    )
-                    .width(148.dp)
-                    .height(34.dp),
+                        color = Color(0xFFB5B5B5),
+                        shape = RoundedCornerShape(size = 5.dp)
+                    ),
+                atualizarValor = {},
+                error = false,
+                iconImage = R.drawable.search
+            )
+            Text(
+                text = "Vídeos em destaques da semana",
+                style = TextStyle(
+                    fontSize = 18.sp,
+                    fontFamily = FontFamily(Font(R.font.poppins_semibold)),
+                    fontWeight = FontWeight(700),
+                    color = Color(0xFF000000),
+                )
+            )
 
-                //.padding(start = 12.dp, top = 5.dp, end = 12.dp, bottom = 5.dp)
-            ) {
-                Row (
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ){
-                    Icon(
-                        painterResource(id = R.drawable.iconcategoria),
-                        contentDescription = null,
-                        Modifier
-                            .size(15.dp)
-                            .fillMaxWidth()
-                            .align(alignment = Alignment.CenterVertically)
-                            .fillMaxWidth(),
+            Box(modifier = Modifier.width(400.dp)
+                .height(218.dp)
+                .background(color = Color(0xFFD9D9D9), shape = RoundedCornerShape(size = 5.dp))
 
-
-                        )
-                    Text(text = "CATEGORIAS")
-                }
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.FillBounds
+                )
             }
 
-
-//            LazyRow (
-//                Modifier
-//                    .padding(top = 10.dp)
-//                    .fillMaxWidth(),
-//            horizontalArrangement = Arrangement.spacedBy(16.dp),
-//            contentPadding = PaddingValues(horizontal = 15.dp)
-//            ){
-//            items(meditacoes) {
-//                    p -> MeditacoesItem(meditacao = p , navController)
-//
-//            }
-//        }
-
-
+            LazyRow (
+                Modifier
+                    .padding(top = 10.dp)
+                    .fillMaxWidth().background(color = Color(0xFFD9E7FF)),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 15.dp)
+            ){
+            items(meditacoes) {
+                    p -> MeditacoesItem(meditacao = p , navController)
+            }
+        }
             LazyVerticalGrid(
-
                 columns = GridCells.Adaptive(minSize = 130.dp),
                 Modifier.padding(top = 20.dp),
                 //contentPadding = PaddingValues(horizontal = 15.dp),
@@ -223,21 +186,11 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios) {
                     item{
                         val meditacaoItem = Meditacao(meditacao.meditacaoId, meditacao.titulo , meditacao.caminhoArquivo)
                         MeditacoesItem(meditacaoItem , navController )
-                        
                     }
-
                 }
             }
-
-
-
-
         }
-
-
-
     }
-    //Footer(nav)
 }
 
 

@@ -100,8 +100,6 @@ class MainActivity : ComponentActivity() {
                             MarcarConsultaScreen(MarcarConsultaScreenViewModel())
                         }
                         composable(route = "Meditacoes") {
-
-
                             MeditacoesScreen(navController, usuario)
                         }
                         composable(route = "VideoMeditacao") {

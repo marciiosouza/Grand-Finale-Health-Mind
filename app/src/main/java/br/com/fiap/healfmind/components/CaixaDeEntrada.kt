@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -31,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.healfmind.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +55,7 @@ fun CaixaDeEntrada(
             atualizarValor
         },
 
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password) ,
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType) ,
 
         leadingIcon = {
             Icon(
@@ -81,14 +81,11 @@ fun CaixaDeEntrada(
                 )
             )
         },
-
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.White,
             unfocusedBorderColor = Color.Transparent,
         )
-
     )
-
 }
 
 @Preview
@@ -105,5 +102,6 @@ fun CaixaDeEntradaPreview() {
                 ambientColor = Color(0x1A000000)
             ),
         atualizarValor = {},
-        error = false, 1)
+        error = false, 1
+    )
 }

@@ -45,15 +45,10 @@ fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
                 .clickable {
                     navController.navigate("VideoMeditacao")
                 }
-
-
-
-
             ) {
             Box() {
 //                    Image(painter = painterResource(id = meditacao.url), contentDescription = null )
                 AsyncImage(
-
                     model = meditacao.caminhoArquivo,
                     contentDescription = null,
                     Modifier
@@ -61,7 +56,6 @@ fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
                         .fillMaxWidth()
                     ,
                     placeholder = painterResource(id = R.drawable.ic_launcher_background)
-
                 )
                 Text(text = meditacao.titulo)
             }
