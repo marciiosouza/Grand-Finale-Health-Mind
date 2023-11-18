@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.model.Usuarios
+import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 import coil.compose.AsyncImage
 
@@ -39,7 +40,7 @@ fun Header(navController:NavController , usuarios: Usuarios) {
         modifier = Modifier
             .fillMaxWidth()
             .height(85.dp)
-            .background(purple_gradient)
+            .background(blue_gradient)
             .padding(start = 20.dp, end = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween

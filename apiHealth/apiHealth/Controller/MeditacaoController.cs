@@ -25,11 +25,38 @@ namespace apiHealth.Controller
             try
             {
                 var lista = meditacaoRepository.ObterTodos();
-                return lista;
+                return Ok(lista);
 
             }catch (Exception ex)
             {
                 return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("PesquisarMeditacao")]
+        public ActionResult<List<MeditacaoModel>> PesquisarMeditacao([FromQuery] string tituloMeditacao)
+        {
+            try
+            {
+                var lista = meditacaoRepository.PesquisarMeditacao(tituloMeditacao);
+                return Ok(lista);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Meditação não encontrada");
+            }
+        }
+
+        [HttpPost("CadastrarMeditacao")]
+        public ActionResult<MeditacaoModel> PostMeditacao([FromBody] MeditacaoModel meditacao)
+        {
+            try
+            {
+                meditacaoRepository.CadastrarMeditacao(meditacao);
+                return Ok(meditacao);
+            }catch(Exception ex)
+            {
+                return BadRequest("Erro ao cadastrar");
             }
         }
     }

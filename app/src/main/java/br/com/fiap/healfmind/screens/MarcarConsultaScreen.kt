@@ -82,21 +82,23 @@ fun MarcarConsultaScreen( marcarConsultaScreenViewModel: MarcarConsultaScreenVie
                         ambientColor = Color(0x1A000000)
                     ),
                 atualizarValor = {},
-                error = false
+                error = false,
+                iconImage = 1
             )
             CaixaDeEntrada(
-                label = "Presencia ou online",
-                placeholder = "Presencia ou online",
-                value = "teste",
-                keyboardType = KeyboardType.Text,
-                modifier = Modifier
-                    .shadow(
-                        elevation = 4.dp,
-                        spotColor = Color(0x1A000000),
-                        ambientColor = Color(0x1A000000)
+                                label = "Presencia ou online",
+                            placeholder = "Presencia ou online",
+                            value = "teste",
+                            keyboardType = KeyboardType.Text,
+                            modifier = Modifier
+                                .shadow(
+                                    elevation = 4.dp,
+                                    spotColor = Color(0x1A000000),
+                                    ambientColor = Color(0x1A000000)
                     ),
                 atualizarValor = {},
-                error = false
+                error = false,
+                iconImage = 1
             )
 
             TextButton(

@@ -1,5 +1,6 @@
 ﻿using apiHealth.Context;
 using apiHealth.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiHealth.Repository
 {
@@ -18,6 +19,19 @@ namespace apiHealth.Repository
              lista = dataBaseContext.meditacao.ToList< MeditacaoModel>();
 
             return lista;
+        }
+
+        public List<MeditacaoModel> PesquisarMeditacao(string tituloMeditacao)
+        {
+            var lista = dataBaseContext.meditacao.Where(m => m.Titulo.Contains(tituloMeditacao)).ToList();
+
+            return lista;
+        }
+
+        public void CadastrarMeditacao(MeditacaoModel meditacao)
+        {
+            dataBaseContext.meditacao.Add(meditacao);
+            dataBaseContext.SaveChanges();
         }
     }
 }
