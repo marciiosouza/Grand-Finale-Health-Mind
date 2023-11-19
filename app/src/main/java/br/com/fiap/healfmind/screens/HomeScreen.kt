@@ -1,10 +1,13 @@
 package br.com.fiap.healfmind.screens
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -28,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -41,6 +46,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.model.Usuarios
 import com.example.healf_mind.components.CardHome
@@ -53,225 +59,94 @@ fun HomeScreen(  navController: NavController , usuarios: Usuarios ) {
         mutableStateOf("")
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-
-        ){
-        Header(navController = navController , usuarios )
+    Box(modifier = Modifier
+        .background(
+            Color.White
+        )
+    ) {
         Column(
             modifier = Modifier
-                .padding(
-                    top = 20.dp,
-                    start = 15.dp,
-                    end = 15.dp,
-                    bottom = 20.dp
-                )
-                .align(alignment = Alignment.Start)
-        ){
-            Text(
-                text = "Olá ${usuarios.nome}",
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                )
-            )
-            Text(
-                text = "Encontre o médico adequado para você",
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    lineHeight = 15.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight(400),
-                    color = Color(0xFF969696),
-                )
-            )
-        }
-        Column(
-            //modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxWidth()
         ) {
-            OutlinedTextField(
-                value = pesquisa,
-                onValueChange = {
-                        letra -> pesquisa = letra
-                },
-                modifier = Modifier
-                    .shadow(
-                        elevation = 4.dp,
-                        spotColor = Color(0x1A000000),
-                        ambientColor = Color(0x1A000000)
-                    )
-                    .padding(bottom = 20.dp)
-                    .width(370.dp)
-                    .height(50.dp)
-                    .background(color = Color(0xFFFAFAFA), shape = RoundedCornerShape(size = 50.dp)),
-                shape = RoundedCornerShape(30.dp),
-                placeholder = {
-                    Text(text = "Pesquisar", color = colorResource(id = R.color.cinza))
-                },
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.search), contentDescription = "",
-                        Modifier.size(15.dp)
-                        )
-                }
+            if (navController != null) {
+                Header(navController , usuarios )
+            }
+
+            Column(modifier = Modifier
+                .padding(40.dp)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             )
-            Card (modifier = Modifier
-                .shadow(
-                    elevation = 4.dp,
-                    spotColor = Color(0x40000000),
-                    ambientColor = Color(0x40000000)
+            {
+                Column(
+                    Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 )
-                .width(370.dp)
-                .height(107.dp),
-                colors = CardDefaults.cardColors(Color(0xFF005DF9)),
-                shape = RoundedCornerShape(25.dp),
+                {
 
-
-                ){
-                Column (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight()
-                        .padding(start = 20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ){
                     Text(
-                        modifier = Modifier.padding(20.dp),
-                        text = "Uma nova opção para você cuidar da sua saúde",
+                        text = "Olá," + "" + usuarios.nome + "  " + "Bom dia!",
                         style = TextStyle(
                             fontSize = 20.sp,
-                            fontFamily = FontFamily.SansSerif,
+                            fontFamily = FontFamily(Font(R.font.inter_bold)),
                             fontWeight = FontWeight(700),
-                            color = Color(0xFFFFFFFF),
-                            textAlign = TextAlign.Center,
+                            color = Color(0xFF000000),
                         )
-
                     )
-                }
 
-            }
-            Row (
-                modifier = Modifier
-                    .align(alignment = Alignment.Start)
-                    .padding(start = 15.dp, top = 10.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+                    Spacer(modifier = Modifier.height(15.dp))
 
-                Card(
-                modifier = Modifier
-                    .width(7.dp)
-                    .height(24.dp) ,
-                    colors = CardDefaults.cardColors(Color(0xFF005DF9)),
-
-
-            ) {
-
-            }
-            Text(
-                text = "Consultas",
-                modifier = Modifier.padding(start = 10.dp),
-                    //.padding(start = 20.dp, top = 20.dp, bottom = 15.dp),
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily(Font(R.font.inter_bold)),
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                )
-
-            )
-            }
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 10.dp, top = 10.dp, bottom = 15.dp, end = 10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                CardHome(titulo = "Marcar\nconsulta" , caminhoImagem = R.drawable.doutor2 , navController , "MarcarConsulta")
-                CardHome(titulo = "Meditações" , caminhoImagem = R.drawable.consulta2,navController , "Meditacoes")
-                CardHome(titulo = "Sono" , caminhoImagem = R.drawable.clinica2,navController , "Meditacoes")
-            }
-            Text(
-                text = "Parceiros com desconto",
-                modifier = Modifier
-                    .align(alignment = Alignment.Start)
-                    .padding(start = 20.dp, top = 10.dp),
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                )
-            )
-            Row (
-                modifier = Modifier
-                    .padding(15.dp)
-                    .align(alignment = Alignment.Start),
-
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Card(
-                    modifier = Modifier
-                        .width(7.dp)
-                        .height(24.dp) ,
-                    colors = CardDefaults.cardColors(Color(0xFF00F0AD)),
-
-                        ){}
-
-                Text(
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier.padding(start = 10.dp),
-                    text = "Confira todos os estabelecimentos\nparceiros com desconto e aproveite",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        lineHeight = 15.sp,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight(400),
-                        color = Color(0xFF969696),
-                    )
-                )
-            }
-            Card(
-                modifier = Modifier
-                    .shadow(
-                        elevation = 4.dp,
-                        spotColor = Color(0x40000000),
-                        ambientColor = Color(0x40000000)
-                    )
-                    .width(370.dp)
-                    .height(107.dp)
-                    .padding(top = 20.dp, bottom = 5.dp),
-
-                colors = CardDefaults.cardColors(Color(0xFF005DF9)),
-                shape = RoundedCornerShape(20.dp)
-            ) {
-                Column (
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ){
-                    Text(text = "Em breve farmácias credenciadas",
+                    Text(
+                        text = "Conheça mais sobre o seu app! \nCuidados com seu bem-estar",
                         style = TextStyle(
-                            fontSize = 20.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight(700),
-                            color = Color(0xFFFFFFFF),
+                            fontSize = 14.sp,
+                            lineHeight = 22.sp,
+                            fontFamily = FontFamily(Font(R.font.inter_regular)),
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFF000000),
                             textAlign = TextAlign.Center,
                         )
                     )
+
+                    Spacer(modifier = Modifier.height(42.dp))
+
+                    Image(
+                        modifier = Modifier
+                            .width(273.17511.dp)
+                            .height(248.51343.dp),
+                        painter = painterResource(id = R.drawable.woman_meditation),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.FillBounds
+                    )
+
+                    Spacer(modifier = Modifier.height(42.dp))
+
+                    Text(
+                        text = "Lorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 22.sp,
+                            fontFamily = FontFamily(Font(R.font.inter_regular)),
+                            color = Color(0xFF000000),
+                        )
+                    )
+
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    ButtonAccess(
+                        atualizarValor = {},
+                        navController = navController,
+                        textButton = "Meditar",
+                        modifier = Modifier,
+                        iconImage = 1,
+                        colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
+                        textColor = Color.White
+                    )
                 }
             }
-            //BottonNavScreen()
-
         }
     }
 }
