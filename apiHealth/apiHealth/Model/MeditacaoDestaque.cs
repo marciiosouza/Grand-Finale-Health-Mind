@@ -14,8 +14,9 @@ namespace apiHealth.Model
         public MeditacaoModel? meditacao { get; set; }
         
         public int UsuarioId { get; set; }
-        [NotMapped]
-        public UsuarioModel? usuario { get; set; }
+
+        [JsonIgnore]
+         public UsuarioModel? usuario { get; set; }
 
 
         public DateTime DataAcesso { get; set; }

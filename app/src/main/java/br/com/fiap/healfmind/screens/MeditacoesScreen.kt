@@ -1,6 +1,5 @@
 package br.com.fiap.healfmind.screens
 
-import android.service.autofill.OnClickAction
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,15 +10,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -34,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -52,14 +55,16 @@ import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.components.MeditacoesItem
 import br.com.fiap.healfmind.model.Meditacao
+import br.com.fiap.healfmind.model.MeditacaoDestaque
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.purple_gradient
+import coil.compose.AsyncImage
 import com.example.healf_mind.components.CaixaDeEntrada
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import java.time.LocalDateTime
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,6 +72,7 @@ import retrofit2.Response
 fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
 
     var meditacoes by remember { mutableStateOf<List<Meditacao>>(emptyList()) }
+    var meditacaoDestaque by remember { mutableStateOf(Meditacao(0, "","","")) }
     LaunchedEffect(true) {
         val call = RetrofitFactory()
             .getMeditacoesService()
@@ -86,7 +92,21 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
 
         })
 
+        val callDestaque = RetrofitFactory().getMeditacoesService().MeditacaoDestaque()
+        callDestaque.enqueue(object : Callback<Meditacao>{
+            override fun onResponse(call: Call<Meditacao>, response: Response<Meditacao>) {
+                meditacaoDestaque = response.body()!!
+            }
+
+            override fun onFailure(call: Call<Meditacao>, t: Throwable) {
+
+            }
+
+        })
+
     }
+
+
 
     Column (Modifier.padding(bottom = 30.dp)){
 
@@ -179,11 +199,14 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
                                 )
 
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_launcher_background),
-                                contentDescription = "image description",
+                            AsyncImage(
+                                model = meditacaoDestaque.caminhoArquivo,
+                                contentDescription = null,
+                                Modifier.fillMaxSize(),
+                                placeholder = painterResource(id = R.drawable.ic_launcher_background),
                                 contentScale = ContentScale.FillBounds
                             )
+
                         }
                     }
 
@@ -254,8 +277,33 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
                                     .height(180.dp)
                                     .width(160.dp)
                                     .clickable {
-                                        Log.i("Clique", "MeditacoesScreen:${meditacaoItem} ")
-                                        Log.i("Clique2", "MeditacoesScreen:${meditacaoItem.meditacaoId} ")
+                                        val dataAcesso: LocalDateTime = LocalDateTime.now()
+                                        val meditacaoDestaque = MeditacaoDestaque(
+                                            MeditacaoId = meditacaoItem.meditacaoId,
+                                            UsuarioId = usuarios.id,
+                                            DataAcesso = dataAcesso
+                                        )
+                                        val call = RetrofitFactory()
+                                            .getMeditacoesService()
+                                            .RegistrarAcesso(meditacaoDestaque)
+
+                                        call.enqueue(object : Callback<MeditacaoDestaque> {
+                                            override fun onResponse(
+                                                call: Call<MeditacaoDestaque>,
+                                                response: Response<MeditacaoDestaque>
+                                            ) {
+                                                Log.i("RegistrandoAcesso", "onResponse: ")
+
+                                            }
+
+                                            override fun onFailure(
+                                                call: Call<MeditacaoDestaque>,
+                                                t: Throwable
+                                            ) {
+                                                Log.i("DeuErradoAcesso", "onResponse:${t.message} ")
+                                            }
+
+                                        })
 
 
 
@@ -283,9 +331,9 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
 
 
 
-//@Preview(showSystemUi =  true)
-//@Composable
-//fun MeditacoesScreenPreview(){
-//
-//    MeditacoesScreen(  navController = rememberNavController() , usuarios = Usuarios(1,"","", "",""))
-//}
+@Preview(showSystemUi =  true)
+@Composable
+fun MeditacoesScreenPreview(){
+
+    MeditacoesScreen(  navController = rememberNavController() , usuarios = Usuarios(1,"","", "",""))
+}
