@@ -81,6 +81,7 @@ fun HomeScreen(navController: NavController , usuarios: Usuarios) {
                     fontWeight = FontWeight(400),
                     color = Color(0xFF000000),
                     textAlign = TextAlign.Center
+
                 )
             )
 

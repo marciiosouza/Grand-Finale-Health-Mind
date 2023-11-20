@@ -72,6 +72,7 @@ fun MenuScreen(navController: NavHostController, usuarios: Usuarios) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         )
+
         {
             Column(
                 Modifier.fillMaxWidth(),

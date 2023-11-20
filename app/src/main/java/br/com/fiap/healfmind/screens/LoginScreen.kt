@@ -122,6 +122,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     iconImage = R.drawable.icon_email,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                 )
+
                 if (!isEmailValid) {
                     Text(
                         text = "Por favor, insira um e-mail válido.",

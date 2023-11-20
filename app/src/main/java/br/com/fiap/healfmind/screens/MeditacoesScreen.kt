@@ -240,6 +240,7 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
 
 
 
+
                     for (meditacao in meditacoes) {
                         item {
                             val meditacaoItem = Meditacao(

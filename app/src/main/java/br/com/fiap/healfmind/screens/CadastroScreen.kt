@@ -159,6 +159,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 iconImage = 1,
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                 textColor = Color.White
+
             )
 
             Spacer(modifier = Modifier.height(10.dp))

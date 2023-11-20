@@ -54,6 +54,7 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios , perfilScre
     val email by perfilScreenViewModel.email.observeAsState(initial = usuarios.email)
     val endereco by perfilScreenViewModel.endereco.observeAsState(initial = "")
 
+
     Box(modifier = Modifier
         .background(
             Color.White

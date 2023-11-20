@@ -33,6 +33,7 @@ fun VideoPlayerScreen(meditacaoId : String ) {
                 call: Call<Meditacao>,
                 response: Response<Meditacao>
             ) {
+
                 Log.i("RespostaVideo", "onResponse:${response.body()} ")
                 meditacao = response.body()!!
                 Log.i("RespostaVideo2", "onResponse:${meditacao} ")
