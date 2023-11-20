@@ -146,7 +146,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                         loginScreenViewModel.onPasswordChanged(it)
                     },
                     error = true,
-                    iconImage = R.drawable.icon_lock,
+                    iconImage = R.drawable.icon_profile,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                 )
             }
@@ -181,7 +181,9 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                clique = {},
+                clique = {
+                         navController.navigate("Cadastro")
+                },
                 navController = navController,
                 textButton = "Criar conta",
                 modifier = Modifier
@@ -200,7 +202,6 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
 
 @Preview
 @Composable
-
 fun LoginScreenPreview() {
     val loginScreenViewModel = LoginScreenViewModel()
     LoginScreen(loginScreenViewModel = loginScreenViewModel, navController = rememberNavController() , usuarios = Usuarios(1 ,"Wagner Morais" , "wag@gmail", "123","teste.jpg") ,onLoginSuccess = {} )

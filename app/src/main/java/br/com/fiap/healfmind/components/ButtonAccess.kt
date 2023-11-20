@@ -22,9 +22,12 @@ fun ButtonAccess(
     iconImage: Int,
     colorButtonColors: ButtonColors,
     textColor: Color,
+
 ) {
     Button(
-        onClick = { clique() },
+        onClick = {
+            clique()
+        },
         modifier = modifier
             .width(300.dp)
             .height(56.dp),

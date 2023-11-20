@@ -23,8 +23,10 @@ import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.screens.CadastroScreen
 import br.com.fiap.healfmind.screens.HomeScreen
+import br.com.fiap.healfmind.screens.HomeScreen2
 import br.com.fiap.healfmind.screens.MarcarConsultaScreen
 import br.com.fiap.healfmind.screens.MeditacoesScreen
+import br.com.fiap.healfmind.screens.MenuScreen
 import br.com.fiap.healfmind.screens.PerfilScreen
 import br.com.fiap.healfmind.screens.VideoPlayerScreen
 import br.com.fiap.healfmind.ui.theme.HealfMindTheme
@@ -85,7 +87,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = "Home") {
                             // var nome = it.arguments?.getString("nome")
-                            HomeScreen(navController, usuario) // double bang -> Tratar valoresNull
+                            HomeScreen2(navController, usuario) // double bang -> Tratar valoresNull
                             //HomeScreen( ) // double bang -> Tratar valoresNull
                         }
                         composable(route = "Perfil") {
@@ -103,14 +105,10 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = "VideoMeditacao/{meditacaoId}") {
                             var meditacaoId = it.arguments?.getString("meditacaoId")
-                            //var caminhoArquivo = it.arguments?.getString("caminhoArquivo")
-                            Log.i("parm Indo", "onCreate:${meditacaoId} ")
-                           // Log.i("parm Indo1", "onCreate:${caminhoArquivo} ")
-
-
-                                    VideoPlayerScreen( meditacaoId!! )
-
-
+                            VideoPlayerScreen( meditacaoId!! )
+                        }
+                        composable(route = "Menu"){
+                            MenuScreen(usuarios = usuario, navController = navController)
                         }
                     }
                 }
