@@ -250,7 +250,7 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
                             )
                             Column {
                                 MeditacoesItem(meditacaoItem, navController , modifier = Modifier
-                                    .height(200.dp)
+                                    .height(180.dp)
                                     .width(160.dp)
                                     .clickable {
                                         Log.i("Clique", "MeditacoesScreen:${meditacaoItem} ")

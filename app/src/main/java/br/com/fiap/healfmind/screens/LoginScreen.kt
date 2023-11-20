@@ -51,7 +51,6 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
     }
 
     fun login(){
-
         val usuario = Usuarios(0,"", texto, senha , fotoPerfil)
         Log.i("Aqui", "onFailure:= ")
         val call = RetrofitFactory().getUsuarioService().getUsuarioByEmailSenha(usuario)
