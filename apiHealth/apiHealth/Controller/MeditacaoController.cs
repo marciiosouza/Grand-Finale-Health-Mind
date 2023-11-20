@@ -59,5 +59,27 @@ namespace apiHealth.Controller
                 return BadRequest("Erro ao cadastrar");
             }
         }
+
+        [HttpGet("{id:int}")]
+        public ActionResult<MeditacaoModel> PesquisarPorId([FromRoute] int id)
+        {
+            try
+            {
+                var meditacao = meditacaoRepository.PesquisarPorId(id);
+
+                if (meditacao == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(meditacao);
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
+        }
+
     }
 }

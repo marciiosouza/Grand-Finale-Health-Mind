@@ -1,5 +1,6 @@
 package br.com.fiap.healfmind.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -32,10 +33,15 @@ import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.database.repository.UsuarioRepository
+import br.com.fiap.healfmind.model.Usuarios
+import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 import br.com.fiap.healfmind.viewModel.CadastroScreenViewModel
 import com.example.healf_mind.components.CaixaDeEntrada
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,6 +55,24 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
     }
     val context = LocalContext.current
     val usuarioRepository = UsuarioRepository(context)
+
+    fun cadastroUsuario(){
+        val usuario = Usuarios(0, nome = nome , senha =  senha , email = email , fotoPerfil = fotoPerfil)
+        val call = RetrofitFactory().getUsuarioService().inserirUsuario(usuario)
+
+        call.enqueue(object : Callback<Usuarios> {
+            override fun onResponse(
+                call: Call<Usuarios>,
+                response: Response<Usuarios>
+            ) {
+                navController.navigate("Login")
+            }
+
+            override fun onFailure(call: Call<Usuarios>, t: Throwable) {
+                Log.i("C$#", "onFailure: ${t.message}")
+            }
+        })
+    }
 
     Box(modifier = Modifier
         .background(
@@ -79,10 +103,12 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 CaixaDeEntrada(
                     label = "",
                     placeholder = "Nome",
-                    value = senha,
+                    value = nome,
                     keyboardType = KeyboardType.Email,
                     modifier = Modifier,
-                    atualizarValor = {},
+                    atualizarValor = {
+                        cadastroScreenViewModel.onNameChanged(it)
+                    },
                     error = true,
                     iconImage = R.drawable.icon_person,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -94,10 +120,12 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 CaixaDeEntrada(
                     label = "",
                     placeholder = "E-mail",
-                    value = senha,
+                    value = email,
                     keyboardType = KeyboardType.Email,
                     modifier = Modifier,
-                    atualizarValor = {},
+                    atualizarValor = {
+                        cadastroScreenViewModel.onEmailChanged(it)
+                    },
                     error = true,
                     iconImage = R.drawable.icon_email,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -111,9 +139,11 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                     value = senha,
                     keyboardType = KeyboardType.Password,
                     modifier = Modifier,
-                    atualizarValor = {},
+                    atualizarValor = {
+                        cadastroScreenViewModel.onSenhaChanged(it)
+                    },
                     error = true,
-                    iconImage = R.drawable.icon_lock,
+                    iconImage = R.drawable.icon_profile,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
                 )
             }
@@ -121,7 +151,9 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {
+                    cadastroUsuario()
+                },
                 navController = navController,
                 textButton = "Fazer Cadastro",
                 modifier = Modifier,
@@ -133,7 +165,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {},
                 navController = navController,
                 textButton = "Entrar com o Google",
                 modifier = Modifier,
@@ -145,7 +177,9 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {
+
+                },
                 navController = navController,
                 textButton = "Fazer login",
                 modifier = Modifier

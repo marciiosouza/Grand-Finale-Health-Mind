@@ -1,5 +1,6 @@
 package com.example.healf_mind.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -51,7 +52,7 @@ fun CaixaDeEntrada(
             .border(0.dp, Color.Transparent),
         value = value,
         onValueChange = {
-            atualizarValor
+            atualizarValor(it)
         },
 
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType) ,

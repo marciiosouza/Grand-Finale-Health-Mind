@@ -49,7 +49,9 @@ fun Header(navController:NavController , usuarios: Usuarios) {
             Image(
                 painter = painterResource(id = R.drawable.menu),
                 contentDescription = "Seta para esquerda",
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(32.dp).clickable {
+                    navController.navigate("Menu")
+                }
             )
 
         Text(

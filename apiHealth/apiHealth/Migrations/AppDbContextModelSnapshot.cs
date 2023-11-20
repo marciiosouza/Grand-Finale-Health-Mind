@@ -37,6 +37,10 @@ namespace apiHealth.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
+                    b.Property<string>("UrlVideo")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
                     b.HasKey("MeditacaoId");
 
                     b.ToTable("tb_Meditacoes");

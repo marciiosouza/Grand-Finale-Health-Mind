@@ -19,16 +19,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.screens.CadastroScreen
 import br.com.fiap.healfmind.screens.HomeScreen
+import br.com.fiap.healfmind.screens.HomeScreen2
 import br.com.fiap.healfmind.screens.MarcarConsultaScreen
 import br.com.fiap.healfmind.screens.MeditacoesScreen
+import br.com.fiap.healfmind.screens.MenuScreen
 import br.com.fiap.healfmind.screens.PerfilScreen
 import br.com.fiap.healfmind.screens.VideoPlayerScreen
 import br.com.fiap.healfmind.ui.theme.HealfMindTheme
 import br.com.fiap.healfmind.viewModel.CadastroScreenViewModel
 import br.com.fiap.healfmind.viewModel.MarcarConsultaScreenViewModel
+import br.com.fiap.healfmind.viewModel.PerfilScreenViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -58,7 +62,7 @@ class MainActivity : ComponentActivity() {
                     )
                 {
                     var usuario by remember { mutableStateOf(Usuarios(0, "", "", "", "")) }
-
+                    //var meditacao by remember { mutableStateOf(Meditacao(0,"","" , "")) }
                     AnimatedNavHost(
                         navController = navController,
                         startDestination = "Menu",
@@ -77,21 +81,18 @@ class MainActivity : ComponentActivity() {
                     ) {
 
                         composable(route = "Login") {
-                            //var usuario by remember { mutableStateOf(Usuarios(0, "", "", "", "")) }
                             LoginScreen(LoginScreenViewModel(), navController, usuario) { it ->
-
                                 usuario = it
-                                Log.i("MainAct", "onCreate:${usuario} ")
                             }
                         }
                         composable(route = "Home") {
                             // var nome = it.arguments?.getString("nome")
-                            HomeScreen(navController, usuario) // double bang -> Tratar valoresNull
+                            HomeScreen2(navController, usuario) // double bang -> Tratar valoresNull
                             //HomeScreen( ) // double bang -> Tratar valoresNull
                         }
                         composable(route = "Perfil") {
 
-                            PerfilScreen(navController, usuario)
+                            PerfilScreen(navController, usuario , PerfilScreenViewModel())
                         }
                         composable(route = "Cadastro") {
                             CadastroScreen(navController, CadastroScreenViewModel())
@@ -100,10 +101,14 @@ class MainActivity : ComponentActivity() {
                             MarcarConsultaScreen(MarcarConsultaScreenViewModel())
                         }
                         composable(route = "Meditacoes") {
-                            MeditacoesScreen(navController, usuario)
+                            MeditacoesScreen(navController, usuario )
                         }
-                        composable(route = "VideoMeditacao") {
-                            VideoPlayerScreen()
+                        composable(route = "VideoMeditacao/{meditacaoId}") {
+                            var meditacaoId = it.arguments?.getString("meditacaoId")
+                            VideoPlayerScreen( meditacaoId!! )
+                        }
+                        composable(route = "Menu"){
+                            MenuScreen(usuarios = usuario, navController = navController)
                         }
                     }
                 }
