@@ -23,7 +23,6 @@ import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.screens.CadastroScreen
 import br.com.fiap.healfmind.screens.HomeScreen
-import br.com.fiap.healfmind.screens.HomeScreen2
 import br.com.fiap.healfmind.screens.MarcarConsultaScreen
 import br.com.fiap.healfmind.screens.MeditacoesScreen
 import br.com.fiap.healfmind.screens.MenuScreen
@@ -65,7 +64,7 @@ class MainActivity : ComponentActivity() {
                     //var meditacao by remember { mutableStateOf(Meditacao(0,"","" , "")) }
                     AnimatedNavHost(
                         navController = navController,
-                        startDestination = "Menu",
+                        startDestination = "Login",
                         exitTransition = {
                             slideOutOfContainer(
                                 towards = AnimatedContentScope.SlideDirection.End,
@@ -87,7 +86,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = "Home") {
                             // var nome = it.arguments?.getString("nome")
-                            HomeScreen2(navController, usuario) // double bang -> Tratar valoresNull
+                            HomeScreen(navController, usuario) // double bang -> Tratar valoresNull
                             //HomeScreen( ) // double bang -> Tratar valoresNull
                         }
                         composable(route = "Perfil") {

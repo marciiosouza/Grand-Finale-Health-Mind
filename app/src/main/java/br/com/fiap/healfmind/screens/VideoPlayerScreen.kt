@@ -46,9 +46,7 @@ fun VideoPlayerScreen(meditacaoId : String ) {
 
     }
 
-        //val videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         val videoUrl = meditacao.urlVideo
-    Log.i("videoUrl", "${meditacao.urlVideo}: ")
         val context = LocalContext.current
         val player = ExoPlayer.Builder(context).build()
         val playerView = PlayerView(context)

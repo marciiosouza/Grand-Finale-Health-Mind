@@ -43,7 +43,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CadastroScreen(navController: NavController, cadastroScreenViewModel: CadastroScreenViewModel) {
 
@@ -160,7 +159,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 iconImage = 1,
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                 textColor = Color.White
-            ) {}
+            )
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -172,13 +171,13 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 iconImage = R.drawable.icon_google,
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
                 textColor = Color.Black
-            ) {}
+            )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
                 clique = {
-
+                    navController.navigate("Login")
                 },
                 navController = navController,
                 textButton = "Fazer login",
@@ -189,194 +188,8 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 iconImage = R.drawable.icon_google,
                 colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
                 textColor = Color.White
-            ) {}
+            )
         }
-
-        /*{
-
-            Image(painter = painterResource(id = R.drawable.logo),
-                contentDescription = "",
-                modifier = Modifier
-                    .width(140.dp)
-                    .height(112.41309.dp)
-            )
-
-            Spacer(modifier = Modifier.height(60.dp))
-            
-            Text(
-                text = "Realizar Cadastro",
-                style = TextStyle(
-                    fontSize = 22.sp,
-                    fontFamily = FontFamily(Font(R.font.inter_bold)),
-                    color = Color(0xFFFFFFFF),
-                )
-            )
-
-            Spacer(modifier = Modifier.height(38.dp))
-
-            OutlinedTextField(modifier = Modifier
-                .width(303.dp)
-                .height(50.dp)
-                .background(
-                    color = Color(0xFFFAFAFA),
-                    shape = RoundedCornerShape(size = 10.dp)
-                )
-                .border(0.dp, Color.Transparent),
-
-                value = nome,
-                onValueChange = {
-                                cadastroScreenViewModel.onNameChanged(it)
-                },
-
-                placeholder = {
-                    Text(
-                        text = "Nome",
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0x4A000000),
-                        )
-                    )
-                },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.White,
-                    unfocusedBorderColor = Color.Transparent,
-                )
-            )
-
-            Spacer(modifier = Modifier.height(17.dp))
-
-            OutlinedTextField(modifier = Modifier
-                .width(303.dp)
-                .height(50.dp)
-                .background(
-                    color = Color(0xFFFAFAFA),
-                    shape = RoundedCornerShape(size = 10.dp)
-                )
-                .border(0.dp, Color.Transparent),
-
-                value = email,
-                onValueChange = {
-                                cadastroScreenViewModel.onEmailChanged(it)
-                },
-
-                placeholder = {
-                    Text(
-                        text = "E-mail",
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0x4A000000),
-                        )
-                    )
-                },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.White,
-                    unfocusedBorderColor = Color.Transparent,
-                )
-            )
-
-            Spacer(modifier = Modifier.height(17.dp))
-
-            OutlinedTextField(modifier = Modifier
-                .width(303.dp)
-                .height(50.dp)
-                .background(
-                    color = Color(0xFFFAFAFA),
-                    shape = RoundedCornerShape(size = 10.dp)
-                )
-                .border(0.dp, Color.Transparent),
-
-                value = senha,
-                onValueChange = {
-                                cadastroScreenViewModel.onSenhaChanged(it)
-                },
-
-                placeholder = {
-                    Text(
-                        text = "Senha",
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0x4A000000),
-                        )
-                    )
-                },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.White,
-                    unfocusedBorderColor = Color.Transparent,
-                )
-            )
-
-            Spacer(modifier = Modifier.height(17.dp))
-
-            Button(
-                onClick = {
-                    val usuario = Usuarios(0, nome = nome , senha =  senha , email = email , fotoPerfil = fotoPerfil)
-                    val call = RetrofitFactory().getUsuarioService().inserirUsuario(usuario)
-
-                    call.enqueue(object : Callback<Usuarios>{
-                        override fun onResponse(
-                            call: Call<Usuarios>,
-                            response: Response<Usuarios>
-                        ) {
-                            navController.navigate("Login")
-                        }
-
-                        override fun onFailure(call: Call<Usuarios>, t: Throwable) {
-                            Log.i("C$#", "onFailure: ${t.message}")
-                        }
-
-                    })
-                },
-                modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp),
-                shape = RoundedCornerShape(size = 10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.azul)
-                )
-
-            ) {
-                Text(text = "Cadastrar")
-            }
-
-            Spacer(modifier = Modifier.height(17.dp))
-
-            Button(
-                onClick = {
-
-                },
-                modifier = Modifier
-                    .width(303.dp)
-                    .height(50.dp),
-                shape = RoundedCornerShape(size = 10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.white)
-                )
-            ) {
-                Text(
-                    text = "Entrar com o Google",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.inter_regular)),
-                        fontWeight = FontWeight(400),
-                        color = Color(0xFF000000)
-                    )
-                )
-
-                Spacer(modifier = Modifier.width(17.dp))
-
-                Image(
-                    painter = painterResource(id = R.drawable.google),
-                    contentDescription = "Seta para esquerda",
-                    modifier = Modifier.size(20.dp)
-                )
-            }
-        }*/
     }
 }
 

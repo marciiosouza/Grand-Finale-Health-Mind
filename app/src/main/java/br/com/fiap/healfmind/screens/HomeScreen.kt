@@ -1,29 +1,20 @@
 package br.com.fiap.healfmind.screens
 
-
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -40,111 +31,82 @@ import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.model.Usuarios
 
-
 @Composable
-fun HomeScreen(  navController: NavController , usuarios: Usuarios ) {
-    var pesquisa by remember {
-        mutableStateOf("")
-    }
-
-    Box(modifier = Modifier
-        .background(
-            Color.White
-        )
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            if (navController != null) {
-                Header(navController , usuarios )
-            }
-
-            Column(modifier = Modifier
-                .padding(40.dp)
+fun HomeScreen(navController: NavController , usuarios: Usuarios) {
+    Box {
+        Column (
+            Modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            )
-            {
-                Column(
-                    Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Header(navController , usuarios )
+            Spacer(Modifier.height(16.dp))
+            Text(
+                text = "Ola, ${usuarios.nome} ",
+                style = TextStyle(
+                    fontSize = 26.sp,
+                    fontFamily = FontFamily(Font(R.font.inter_bold)),
+                    fontWeight = FontWeight(700),
+                    color = Color(0xFF000000),
                 )
-                {
+            )
 
-                    Text(
-                        text = "Olá," + "" + usuarios.nome + "  " + "Bom dia!",
-                        style = TextStyle(
-                            fontSize = 20.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_bold)),
-                            fontWeight = FontWeight(700),
-                            color = Color(0xFF000000),
-                        )
-                    )
+            Text(
+                text = "Conheça mais sobre o seu app! \nCuidados com seu bem-estar",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    lineHeight = 22.sp,
+                    fontFamily = FontFamily(Font(R.font.inter_bold)),
+                    fontWeight = FontWeight(400),
+                    color = Color(0xFF000000),
+                    textAlign = TextAlign.Center,
+                )
+            )
+            Spacer(Modifier.height(16.dp))
+            Image(
+                painter = painterResource(id = R.drawable.meditar),
+                contentDescription = null,
+                Modifier
+                    .width(273.17511.dp)
+                    .height(248.51343.dp)
+            )
+            Spacer(Modifier.height(16.dp))
+            Text(
+                text = "Lorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    lineHeight = 22.sp,
+                    fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                    fontWeight = FontWeight(400),
+                    color = Color(0xFF000000),
+                    textAlign = TextAlign.Center
+                )
+            )
 
-                    Spacer(modifier = Modifier.height(15.dp))
+            ButtonAccess(
+                clique = {
+                         navController.navigate("Meditacoes")
+                },
+                navController = navController,
+                textButton = "Meditar",
+                modifier = Modifier,
+                iconImage = 0,
+                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
+                textColor = Color.White,
+                )
 
-                    Text(
-                        text = "Conheça mais sobre o seu app! \nCuidados com seu bem-estar",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            lineHeight = 22.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF000000),
-                            textAlign = TextAlign.Center,
-                        )
-                    )
+            Spacer(Modifier.height(16.dp))
 
-                    Spacer(modifier = Modifier.height(42.dp))
-
-                    Image(
-                        modifier = Modifier
-                            .width(273.17511.dp)
-                            .height(248.51343.dp),
-                        painter = painterResource(id = R.drawable.woman_meditation),
-                        contentDescription = "image description",
-                        contentScale = ContentScale.FillBounds
-                    )
-
-                    Spacer(modifier = Modifier.height(42.dp))
-
-                    Text(
-                        text = "Lorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            lineHeight = 22.sp,
-                            fontFamily = FontFamily(Font(R.font.inter_regular)),
-                            color = Color(0xFF000000),
-                        )
-                    )
-
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    ButtonAccess(
-                        clique = {},
-                        atualizarValor = {},
-                        navController = navController,
-                        textButton = "Meditar",
-                        modifier = Modifier,
-                        iconImage = 1,
-                        colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
-                        textColor = Color.White
-                    )
-                }
-            }
         }
+
     }
 }
 
 
 
-@Preview(showSystemUi =  true , showBackground = true)
+@Preview
 @Composable
-fun HomeScreenPreview() {
-    HomeScreen(navController = rememberNavController() , usuarios = Usuarios(1,"Wagner" , "teste" , "1234560" , "jpg"))
+fun HomeScreen2Preview() {
+    HomeScreen(navController = rememberNavController(), Usuarios(1,"Wagner" , "" , "",""))
 }
-

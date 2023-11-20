@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun ButtonProfile(
-    atualizarValor: (String) -> Unit,
+    onClique: () -> Unit,
     navController: NavController,
     textButton: String,
     modifier: Modifier,
@@ -25,7 +25,7 @@ fun ButtonProfile(
 
 ) {
     Button(
-        onClick = { atualizarValor(textButton) },
+        onClick = { onClique() },
         modifier = modifier
             .width(300.dp)
             .height(56.dp),

@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -278,7 +279,7 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios , perfilScre
                     iconImage = R.drawable.icon_exit,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                     textColor = Color.White
-                ) {}
+                )
 
                 ButtonAccess(
                     clique = {},
@@ -288,17 +289,17 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios , perfilScre
                     iconImage = R.drawable.icon_delete,
                     colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
                     textColor = Color.Red
-                ) {}
+                )
             }
         }
     }
 }
 
-//@Preview
-//@Composable
-//fun PerfilScreenPreview() {
-//    PerfilScreen(navController = rememberNavController() , usuarios = Usuarios(1,"","","",""))
-//}
+@Preview
+@Composable
+fun PerfilScreenPreview() {
+    PerfilScreen(navController = rememberNavController() , usuarios = Usuarios(1,"","","",""), perfilScreenViewModel = PerfilScreenViewModel())
+}
 
 
 

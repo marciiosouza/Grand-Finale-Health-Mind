@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.screens.HomeScreen
 
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun BottomNavbar() {
