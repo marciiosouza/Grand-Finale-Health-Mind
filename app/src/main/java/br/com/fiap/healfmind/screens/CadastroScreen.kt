@@ -160,7 +160,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 iconImage = 1,
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                 textColor = Color.White
-            )
+            ) {}
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -172,7 +172,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 iconImage = R.drawable.icon_google,
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
                 textColor = Color.Black
-            )
+            ) {}
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -189,7 +189,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
                 iconImage = R.drawable.icon_google,
                 colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
                 textColor = Color.White
-            )
+            ) {}
         }
 
         /*{

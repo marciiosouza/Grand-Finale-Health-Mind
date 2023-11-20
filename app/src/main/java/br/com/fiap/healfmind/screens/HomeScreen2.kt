@@ -30,7 +30,6 @@ import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.model.Usuarios
-import com.example.healf_mind.components.CaixaDeEntrada
 
 @Composable
 fun HomeScreen2(navController: NavController , usuarios: Usuarios) {
@@ -96,7 +95,7 @@ fun HomeScreen2(navController: NavController , usuarios: Usuarios) {
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                 textColor = Color.White,
 
-            )
+                ) {}
 
         }
 

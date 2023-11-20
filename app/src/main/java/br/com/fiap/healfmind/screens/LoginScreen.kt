@@ -164,7 +164,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                 textColor = Color.White
 
-            )
+            ) {}
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -176,7 +176,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 iconImage = R.drawable.icon_google,
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
                 textColor = Color.Black
-            )
+            ) {}
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -193,7 +193,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 iconImage = R.drawable.icon_google,
                 colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
                 textColor = Color.White
-            )
+            ) {}
         }
     }
 }

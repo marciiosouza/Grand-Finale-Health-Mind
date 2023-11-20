@@ -278,7 +278,7 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios , perfilScre
                     iconImage = R.drawable.icon_exit,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                     textColor = Color.White
-                )
+                ) {}
 
                 ButtonAccess(
                     clique = {},
@@ -288,7 +288,7 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios , perfilScre
                     iconImage = R.drawable.icon_delete,
                     colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
                     textColor = Color.Red
-                )
+                ) {}
             }
         }
     }

@@ -22,8 +22,9 @@ fun ButtonAccess(
     iconImage: Int,
     colorButtonColors: ButtonColors,
     textColor: Color,
+    atualizarValor: () -> Unit,
 
-) {
+    ) {
     Button(
         onClick = {
             clique()

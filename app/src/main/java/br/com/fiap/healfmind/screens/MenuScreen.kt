@@ -155,25 +155,21 @@ fun MenuScreen(navController: NavHostController, usuarios: Usuarios) {
                         Spacer(modifier = Modifier.height(10.dp))
 
                         ButtonAccess(
-                            atualizarValor = {},
+                            clique = {},
                             navController = rememberNavController(),
                             textButton = "Sair da conta",
                             modifier = Modifier,
                             iconImage = R.drawable.icon_exit,
                             colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
-                            textColor = Color.Black
+                            textColor = Color.Black,
+                            atualizarValor = {},
                         )
                     }
                 }
             }
         }
-
     }
-
     }
-
-
-
 }
 
 @Preview
