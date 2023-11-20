@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
 
                     AnimatedNavHost(
                         navController = navController,
-                        startDestination = "Home",
+                        startDestination = "Menu",
                         exitTransition = {
                             slideOutOfContainer(
                                 towards = AnimatedContentScope.SlideDirection.End,
