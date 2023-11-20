@@ -1,9 +1,11 @@
 package br.com.fiap.healfmind.screens
 
+import android.service.autofill.OnClickAction
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -61,7 +64,7 @@ import retrofit2.Response
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MeditacoesScreen( navController: NavController , usuarios: Usuarios) {
+fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
 
     var meditacoes by remember { mutableStateOf<List<Meditacao>>(emptyList()) }
     LaunchedEffect(true) {
@@ -84,115 +87,204 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios) {
         })
 
     }
+
     Column (Modifier.padding(bottom = 30.dp)){
 
         Header(navController = navController , usuarios)
 
 
+        Box(modifier = Modifier){
+            Column (
+                Modifier.fillMaxWidth(),
 
-        Column (
-            Modifier.padding(start = 16.dp , end = 16.dp ),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ){
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-            Spacer(modifier = Modifier.height(12.dp))
-        Card (
-                modifier = Modifier
-                    .width(350.dp)
-                    .height(150.dp)
-                    .padding(top = 15.dp, bottom = 15.dp),
+                Spacer(modifier = Modifier.height(12.dp))
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(minSize = 130.dp),
+                    Modifier.padding(top = 20.dp),
+                    contentPadding = PaddingValues(horizontal = 15.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    item(span = {GridItemSpan(maxLineSpan)} ) {
+                        Card(
+                            modifier = Modifier
+                                .width(320.dp)
+                                .height(150.dp)
+                                .padding(top = 15.dp, bottom = 15.dp),
+
+                            colors = CardDefaults.cardColors(purple_gradient)
+                        ) {
+                            Text(
+                                text = "Medite conosco para uma mente mais calma",
+                                Modifier.padding(top = 30.dp),
+                                style = TextStyle(
+                                    fontSize = 21.sp,
+                                    lineHeight = 23.57.sp,
+                                    fontFamily = FontFamily(Font(R.font.poppins_semibold)),
+                                    fontWeight = FontWeight(700),
+                                    color = Color(0xFFFFFFFF),
+                                    textAlign = TextAlign.Center
+                                )
+                            )
+                        }
+
+                    }
+
+                    item (span = {GridItemSpan(maxLineSpan)} ) {
+                        CaixaDeEntrada(
+                            label = "",
+                            placeholder = "Pesquisar",
+                            value = "",
+                            keyboardType = KeyboardType.Text,
+                            modifier = Modifier
+                                .width(450.dp)
+                                .border(
+                                    width = 1.dp,
+                                    color = Color(0xFFB5B5B5),
+                                    shape = RoundedCornerShape(size = 5.dp)
+                                ),
+                            atualizarValor = {},
+                            error = false,
+                            iconImage = R.drawable.search,
+                            colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
+
+                        )
+
+                    }
+
+                    item (span = {GridItemSpan(maxLineSpan)} )  {
+                        Text(
+                            text = "Vídeos em destaques da semana",
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                fontFamily = FontFamily(Font(R.font.poppins_semibold)),
+                                fontWeight = FontWeight(700),
+                                color = Color(0xFF000000),
+                            )
+                        )
+                    }
+
+
+                    item(span = {GridItemSpan(maxLineSpan)} )  {
+                        Box(
+                            modifier = Modifier
+                                .width(400.dp)
+                                .height(218.dp)
+                                .background(
+                                    color = Color(0xFFD9D9D9),
+                                    shape = RoundedCornerShape(size = 5.dp)
+                                )
+
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_launcher_background),
+                                contentDescription = "image description",
+                                contentScale = ContentScale.FillBounds
+                            )
+                        }
+                    }
+
+                    item (span = {GridItemSpan(maxLineSpan)} ) {
+                        LazyRow(
+                            Modifier
+                                .padding(top = 10.dp)
+                                .fillMaxWidth()
+                                .height(150.dp)
+                                .background(color = Color(0xFFD9E7FF)),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            contentPadding = PaddingValues(horizontal = 15.dp)
+                        ) {
+                            items(meditacoes) { p ->
+                                MeditacoesItem(
+                                    meditacao = p,
+                                    navController,
+                                    modifier = Modifier
+                                        .width(110.dp)
+                                        .height(110.dp)
+                                )
+
+                            }
+                        }
+                    }
+
+                    item(span = {GridItemSpan(maxLineSpan)}){
+                        Column(
+                            horizontalAlignment = Alignment.Start
+                        ) {
+                            Text(
+                                text = "Selecione o seu aúdio",
+                                style = TextStyle(
+                                    fontSize = 18.sp,
+                                    fontFamily = FontFamily(Font(R.font.poppins_semibold)),
+                                    fontWeight = FontWeight(700),
+                                    color = Color(0xFF000000),
+                                )
+                            )
+                            Text(
+                                text = "Lorem ipsum dolor sit amet consectetur.",
+                                style = TextStyle(
+                                    fontSize = 14.sp,
+                                    fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                                    fontWeight = FontWeight(400),
+                                    color = Color(0xFF000000),
+                                )
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
 
 
 
-                colors = CardDefaults.cardColors(purple_gradient)
-            ){
-                Text(text = "Medite conosco para uma mente mais calma",
-                    Modifier.padding(top = 30.dp),
-                    style = TextStyle(
-                        fontSize = 21.sp,
-                        lineHeight = 23.57.sp,
-                        fontFamily = FontFamily(Font(R.font.poppins_semibold)),
-                        fontWeight = FontWeight(700),
-                        color = Color(0xFFFFFFFF),
-                        textAlign = TextAlign.Center),
+                    for (meditacao in meditacoes) {
+                        item {
+                            val meditacaoItem = Meditacao(
+                                meditacao.meditacaoId,
+                                meditacao.titulo,
+                                meditacao.caminhoArquivo,
+                                meditacao.urlVideo
+                            )
+                            Column {
+                                MeditacoesItem(meditacaoItem, navController , modifier = Modifier
+                                    .height(200.dp)
+                                    .width(160.dp)
+                                    .clickable {
+                                        Log.i("Clique", "MeditacoesScreen:${meditacaoItem} ")
+                                        Log.i("Clique2", "MeditacoesScreen:${meditacaoItem.meditacaoId} ")
 
-                )
-            }
 
 
-            CaixaDeEntrada(
-                label = "",
-                placeholder = "Pesquisar",
-                value = "",
-                keyboardType = KeyboardType.Text,
-                modifier = Modifier
-                    .width(450.dp)
-                    .border(
-                        width = 1.dp,
-                        color = Color(0xFFB5B5B5),
-                        shape = RoundedCornerShape(size = 5.dp)
-                    ),
-                atualizarValor = {},
-                error = false,
-                iconImage = R.drawable.search,
-                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
-            )
-            Text(
-                text = "Vídeos em destaques da semana",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontFamily = FontFamily(Font(R.font.poppins_semibold)),
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                )
-            )
+                                        navController.navigate("VideoMeditacao/${meditacaoItem.meditacaoId}")
+                                    })
+                                Text(text = meditacao.titulo, style = TextStyle(
+                                    fontSize = 18.sp,
+                                    lineHeight = 25.2.sp,
+                                    fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                                    fontWeight = FontWeight(600),
+                                    color = Color(0xFF000000),
 
-            Box(modifier = Modifier.width(400.dp)
-                .height(218.dp)
-                .background(color = Color(0xFFD9D9D9), shape = RoundedCornerShape(size = 5.dp))
+                                    ))
+                            }
 
-            ){
-                Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.FillBounds
-                )
-            }
 
-            LazyRow (
-                Modifier
-                    .padding(top = 10.dp)
-                    .fillMaxWidth().background(color = Color(0xFFD9E7FF)),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(horizontal = 15.dp)
-            ){
-            items(meditacoes) {
-                    p -> MeditacoesItem(meditacao = p , navController)
-            }
-        }
-            LazyVerticalGrid(
-                columns = GridCells.Adaptive(minSize = 130.dp),
-                Modifier.padding(top = 20.dp),
-                //contentPadding = PaddingValues(horizontal = 15.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ){
-                for(meditacao in meditacoes){
-                    item{
-                        val meditacaoItem = Meditacao(meditacao.meditacaoId, meditacao.titulo , meditacao.caminhoArquivo)
-                        MeditacoesItem(meditacaoItem , navController )
+                        }
                     }
                 }
             }
+
         }
     }
 }
 
 
 
-@Preview(showSystemUi =  true)
-@Composable
-fun MeditacoesScreenPreview(){
-
-    MeditacoesScreen(  navController = rememberNavController() , usuarios = Usuarios(1,"","", "",""))
-}
+//@Preview(showSystemUi =  true)
+//@Composable
+//fun MeditacoesScreenPreview(){
+//
+//    MeditacoesScreen(  navController = rememberNavController() , usuarios = Usuarios(1,"","", "",""))
+//}

@@ -18,10 +18,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,7 +32,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -40,13 +40,18 @@ import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.model.Usuarios
+import br.com.fiap.healfmind.viewModel.PerfilScreenViewModel
 import com.example.healf_mind.components.CaixaDeEntrada
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-//fun PerfilScreen() {
-fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
 
+@Composable
+fun PerfilScreen(navController: NavController? , usuarios: Usuarios , perfilScreenViewModel: PerfilScreenViewModel) {
+
+    val nome by perfilScreenViewModel.nome.observeAsState(initial = usuarios.nome)
+    val cpf by perfilScreenViewModel.cpf.observeAsState(initial = "")
+    val celular by perfilScreenViewModel.celular.observeAsState(initial = "")
+    val email by perfilScreenViewModel.email.observeAsState(initial = usuarios.email)
+    val endereco by perfilScreenViewModel.endereco.observeAsState(initial = "")
 
     Box(modifier = Modifier
         .background(
@@ -89,10 +94,12 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                     CaixaDeEntrada(
                         label = "",
                         placeholder = "Nome",
-                        value = "",
+                        value = nome,
                         keyboardType = KeyboardType.Email,
                         modifier = Modifier,
-                        atualizarValor = {},
+                        atualizarValor = {
+                                         perfilScreenViewModel.onNomeChanged(it)
+                        },
                         error = true,
                         iconImage = R.drawable.icon_person,
                         colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -108,10 +115,12 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                     CaixaDeEntrada(
                         label = "",
                         placeholder = "CPF",
-                        value = "",
+                        value = cpf,
                         keyboardType = KeyboardType.Email,
                         modifier = Modifier,
-                        atualizarValor = {},
+                        atualizarValor = {
+                            perfilScreenViewModel.onCpfChanged(it)
+                        },
                         error = true,
                         iconImage = R.drawable.icon_person,
                         colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -139,10 +148,12 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                     CaixaDeEntrada(
                         label = "",
                         placeholder = "Celular",
-                        value = "",
+                        value = celular,
                         keyboardType = KeyboardType.Email,
                         modifier = Modifier,
-                        atualizarValor = {},
+                        atualizarValor = {
+                            perfilScreenViewModel.onCelularChanged(it)
+                        },
                         error = true,
                         iconImage = R.drawable.icon_edit,
                         colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -158,10 +169,12 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                     CaixaDeEntrada(
                         label = "",
                         placeholder = "E-mail",
-                        value = "",
+                        value = email,
                         keyboardType = KeyboardType.Email,
                         modifier = Modifier,
-                        atualizarValor = {},
+                        atualizarValor = {
+                            perfilScreenViewModel.onEmailChanged(it)
+                        },
                         error = true,
                         iconImage = R.drawable.icon_edit,
                         colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -177,10 +190,12 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                     CaixaDeEntrada(
                         label = "",
                         placeholder = "Endereco",
-                        value = "",
+                        value = endereco,
                         keyboardType = KeyboardType.Email,
                         modifier = Modifier,
-                        atualizarValor = {},
+                        atualizarValor = {
+                            perfilScreenViewModel.onEnderecoChanged(it)
+                        },
                         error = true,
                         iconImage = R.drawable.icon_edit,
                         colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -256,7 +271,7 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                 Spacer(modifier = Modifier.height(25.dp))
 
                 ButtonAccess(
-                    atualizarValor = {},
+                    clique = {},
                     navController = rememberNavController(),
                     textButton = "Sair da conta",
                     modifier = Modifier,
@@ -266,7 +281,7 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
                 )
 
                 ButtonAccess(
-                    atualizarValor = {},
+                    clique = {},
                     navController = rememberNavController(),
                     textButton = "Excluir conta",
                     modifier = Modifier,
@@ -279,11 +294,11 @@ fun PerfilScreen(navController: NavController? , usuarios: Usuarios) {
     }
 }
 
-@Preview
-@Composable
-fun PerfilScreenPreview() {
-    PerfilScreen(navController = rememberNavController() , usuarios = Usuarios(1,"","","",""))
-}
+//@Preview
+//@Composable
+//fun PerfilScreenPreview() {
+//    PerfilScreen(navController = rememberNavController() , usuarios = Usuarios(1,"","","",""))
+//}
 
 
 

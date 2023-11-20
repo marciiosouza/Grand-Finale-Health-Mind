@@ -33,5 +33,13 @@ namespace apiHealth.Repository
             dataBaseContext.meditacao.Add(meditacao);
             dataBaseContext.SaveChanges();
         }
+
+
+        public MeditacaoModel PesquisarPorId(int id) 
+        {
+            var meditacao =  dataBaseContext.meditacao.FirstOrDefault(m => m.MeditacaoId == id);
+
+            return meditacao;
+        }
     }
 }

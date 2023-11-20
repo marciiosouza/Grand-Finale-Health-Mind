@@ -121,7 +121,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {},
                 navController = navController,
                 textButton = "Fazer Cadastro",
                 modifier = Modifier,
@@ -133,7 +133,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {},
                 navController = navController,
                 textButton = "Entrar com o Google",
                 modifier = Modifier,
@@ -145,7 +145,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {},
                 navController = navController,
                 textButton = "Fazer login",
                 modifier = Modifier

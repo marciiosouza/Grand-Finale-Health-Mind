@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,11 +30,15 @@ import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
 import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.model.Usuarios
+import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.blue_gradient
 import br.com.fiap.healfmind.ui.theme.purple_gradient
 import com.example.healf_mind.components.CaixaDeEntrada
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavController , usuarios: Usuarios, onLoginSuccess: (Usuarios) -> Unit) {
 
@@ -44,6 +48,29 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
     val tamanhoMax  = 10
     var fotoPerfil by remember {
         mutableStateOf("")
+    }
+
+    fun login(){
+
+        val usuario = Usuarios(0,"", texto, senha , fotoPerfil)
+        Log.i("Aqui", "onFailure:= ")
+        val call = RetrofitFactory().getUsuarioService().getUsuarioByEmailSenha(usuario)
+        call.enqueue(object : Callback<Usuarios> {
+            override fun onResponse(
+                call: Call<Usuarios>,
+                response: Response<Usuarios>
+            ) {
+                val respostaApi = response.body()
+                if (respostaApi != null) {
+                    Log.i("Deu certo", "${respostaApi} ")
+                    onLoginSuccess(respostaApi)
+                    navController.navigate("Home")
+                }
+            }
+            override fun onFailure(call: Call<Usuarios>, t: Throwable) {
+                Log.i("DeuErrado", "onFailure:${t.message} ")
+            }
+        })
     }
 
     var isEmailValid by remember { mutableStateOf(true) }
@@ -82,7 +109,20 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 horizontalAlignment = Alignment.CenterHorizontally
             )
             {
-
+                CaixaDeEntrada(
+                    label = "",
+                    placeholder = "E-mail",
+                    value = texto,
+                    keyboardType = KeyboardType.Email,
+                    modifier = Modifier,
+                    atualizarValor = {
+                        loginScreenViewModel.onTextoChanged(it)
+                        isEmailValid = isEmailValid(texto)
+                    },
+                    error = true,
+                    iconImage = R.drawable.icon_email,
+                    colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
+                )
                 if (!isEmailValid) {
                     Text(
                         text = "Por favor, insira um e-mail válido.",
@@ -93,20 +133,6 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     )
                 }
 
-                CaixaDeEntrada(
-                    label = "",
-                    placeholder = "E-mail",
-                    value = senha,
-                    keyboardType = KeyboardType.Email,
-                    modifier = Modifier,
-                    atualizarValor = {
-                        loginScreenViewModel.onTextoChanged(it)
-                        isEmailValid = isEmailValid("Por favor, insira um e-mail válido.")
-                    },
-                    error = true,
-                    iconImage = R.drawable.icon_email,
-                    colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
-                )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -116,7 +142,9 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     value = senha,
                     keyboardType = KeyboardType.Password,
                     modifier = Modifier,
-                    atualizarValor = {},
+                    atualizarValor = {
+                        loginScreenViewModel.onPasswordChanged(it)
+                    },
                     error = true,
                     iconImage = R.drawable.icon_lock,
                     colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
@@ -126,19 +154,22 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {
+                    login()
+                },
                 navController = navController,
                 textButton = "Realizar login",
                 modifier = Modifier,
                 iconImage = 1,
                 colorButtonColors = ButtonDefaults.buttonColors(Color(0xFF005FFF)),
                 textColor = Color.White
+
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {},
                 navController = navController,
                 textButton = "Entrar com o Google",
                 modifier = Modifier,
@@ -150,7 +181,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
             Spacer(modifier = Modifier.height(10.dp))
 
             ButtonAccess(
-                atualizarValor = {},
+                clique = {},
                 navController = navController,
                 textButton = "Criar conta",
                 modifier = Modifier
@@ -164,6 +195,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
         }
     }
 }
+
+
 
 @Preview
 @Composable

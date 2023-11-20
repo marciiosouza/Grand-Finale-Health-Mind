@@ -33,18 +33,13 @@ import retrofit2.Response
 
 
 @Composable
-fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
+fun MeditacoesItem(meditacao: Meditacao , navController: NavController, modifier: Modifier) {
     Surface(
         shape = RoundedCornerShape(10.dp),
         shadowElevation = 4.dp
     ) {
         Column(
-            Modifier
-                .height(200.dp)
-                .width(160.dp)
-                .clickable {
-                    navController.navigate("VideoMeditacao")
-                }
+            modifier
             ) {
             Box() {
 //                    Image(painter = painterResource(id = meditacao.url), contentDescription = null )
@@ -57,7 +52,7 @@ fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
                     ,
                     placeholder = painterResource(id = R.drawable.ic_launcher_background)
                 )
-                Text(text = meditacao.titulo)
+
             }
         }
 
@@ -67,35 +62,19 @@ fun MeditacoesItem(meditacao: Meditacao , navController: NavController) {
 
 
 
-//                    val call = RetrofitFactory()
-//                        .getMeditacoesService()
-//                        .getMeditacoes()
-//                    call.enqueue(object : Callback<List<Meditacao>> {
-//                        override fun onResponse(
-//                            call: Call<List<Meditacao>>,
-//                            response: Response<List<Meditacao>>
-//                        ) {
-//                            Log.i("b12", "onResponse:${response.body()} ")
-//                        }
+
+//@Preview()
+//@Composable
+//fun MeditacoesItemPreview(){
 //
-//                        override fun onFailure(call: Call<List<Meditacao>>, t: Throwable) {
-//                            Log.i("x12", "onFailure:${t.message} ")
-//                        }
-//
-//                    })
-
-
-@Preview()
-@Composable
-fun MeditacoesItemPreview(){
-
-    MeditacoesItem(
-        meditacao = Meditacao(
-            1,
-            "teste",
-            "http://pt.hdwall365.com/wallpapers/1512/Winter-sunrise-lake-ice-snow-beautiful-scenery_1280x1024_wallpaper.jpg"
-        ),
-        navController = rememberNavController()
-    )
-}
+//    MeditacoesItem(
+//        meditacao = Meditacao(
+//            1,
+//            "teste",
+//            "http://pt.hdwall365.com/wallpapers/1512/Winter-sunrise-lake-ice-snow-beautiful-scenery_1280x1024_wallpaper.jpg"
+//        ),
+//        navController = rememberNavController(),
+//        modifier = Modifier
+//    )
+//}
 

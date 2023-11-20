@@ -11,5 +11,6 @@ namespace apiHealth.Model
 
         public String Titulo { get; set; }
         public String CaminhoArquivo { get; set; }
+        public String UrlVideo { get; set; }
     }
 }
