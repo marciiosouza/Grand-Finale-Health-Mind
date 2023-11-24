@@ -1,4 +1,4 @@
-<h1 align="center"> Aplicativo Healf Mind </h1>
+<h1 align="center"> 📱Health Mind </h1>
 
 
 <p align="center">
@@ -16,15 +16,23 @@
 
 <br>
 
-
 ## 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- Kotlin
+**Protótipo**
 - Figma
-- Git e Github
+
+**IDE | Linguagem**
 - Android Studio
+
+**APIs**
+- API Restfully
+- Web Scraping
+- Retrofit
+
+**Versionamento**
+- Git & Github
 
 <br>
 
@@ -48,5 +56,3 @@ Esse projeto está sob a licença MIT.
 ---
 
 Desenvolvido por: Marcio Souza e Wagner Morais
-# healthMinde
-# app_healfMind
