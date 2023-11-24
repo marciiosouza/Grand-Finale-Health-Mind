@@ -13,6 +13,7 @@ class MeditacoesViewModel {
     val tituloMeditacao : LiveData<String> = _tituloMeditacao
 
 
+
     fun onTituloChanged(notoTitulo: String){
         _tituloMeditacao.value = notoTitulo
     }

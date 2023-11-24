@@ -12,6 +12,7 @@ class CadastroScreenViewModel : ViewModel() {
         _nome.value = novoValor
     }
 
+
     private val _email = MutableLiveData<String>()
     val email : LiveData<String> = _email
     fun onEmailChanged(novoValor : String){

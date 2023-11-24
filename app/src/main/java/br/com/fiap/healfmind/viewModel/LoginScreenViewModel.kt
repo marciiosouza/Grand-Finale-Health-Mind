@@ -12,6 +12,7 @@ class LoginScreenViewModel : ViewModel() {
     private val _password = MutableLiveData<String>()
     val password: LiveData<String> = _password
 
+
     fun onTextoChanged(novoTexto: String){
         _texto.value = novoTexto
     }

@@ -68,6 +68,8 @@ fun MarcarConsultaScreen( marcarConsultaScreenViewModel: MarcarConsultaScreenVie
                 .fillMaxWidth()
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
+
+
         ) {
 
 

@@ -26,6 +26,7 @@ class PerfilScreenViewModel : ViewModel() {
         _nome.value = novoNome
     }
 
+
     fun onCpfChanged(novoCpf : String){
         _cpf.value = novoCpf
     }
