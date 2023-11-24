@@ -22,9 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
@@ -110,6 +115,31 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                 horizontalAlignment = Alignment.CenterHorizontally
             )
             {
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ){
+                    Text(
+                        text = "Fazer Login",
+                        style = TextStyle(
+                            fontSize = 26.sp,
+                            fontFamily = FontFamily(Font(R.font.inter_bold)),
+                            fontWeight = FontWeight(700),
+                            color = Color(0xFFFFFFFF),
+                        )
+                    )
+
+                    Text(
+                        text = "Insira seus dados para realizar o login",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontFamily = FontFamily(Font(R.font.inter_regular)),
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFFFFFFFF),
+                        )
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(40.dp))
                 CaixaDeEntrada(
                     label = "",
                     placeholder = "E-mail",

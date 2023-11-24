@@ -74,7 +74,11 @@ fun HomeScreen(navController: NavController , usuarios: Usuarios) {
             )
             Spacer(Modifier.height(16.dp))
             Text(
-                text = "Lorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus. Lorem ipsum dolor sit amet consectetur.\n\nLorem ipsum dolor sit amet consectetur. Lacinia venenatis nunc nulla enim nulla vel pulvinar metus.\n",
+                text = "A prática da meditação traz inúmeros benefícios para o bem-estar " +
+                        "físico e mental. Ao cultivar a atenção plena, a meditação ajuda a " +
+                        "reduzir o estresse e a ansiedade, promovendo um estado de relaxamento " +
+                        "profundo.\n Além disso, ela fortalece a capacidade de concentração e " +
+                        "melhora a qualidade do sono. ",
                 Modifier.padding(start = 15.dp , end = 15.dp),
                 style = TextStyle(
                     fontSize = 14.sp,
@@ -86,7 +90,7 @@ fun HomeScreen(navController: NavController , usuarios: Usuarios) {
 
                 )
             )
-
+            Spacer(modifier = Modifier.height(10.dp))
             ButtonAccess(
                 clique = {
                          navController.navigate("Meditacoes")

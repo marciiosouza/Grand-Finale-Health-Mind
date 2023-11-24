@@ -79,8 +79,8 @@ fun FundadoresScreen(navController: NavController , usuarios: Usuarios) {
                 colors = CardDefaults.cardColors(purple_gradient)
             ) {
                 Text(
-                    text = "Medite conosco para uma mente mais calma",
-                    Modifier.padding(top = 30.dp),
+                    text = "Projeto desenvolvido para Fintech",
+                    Modifier.padding(top = 35.dp),
                     style = TextStyle(
                         fontSize = 21.sp,
                         lineHeight = 23.57.sp,
@@ -96,7 +96,10 @@ fun FundadoresScreen(navController: NavController , usuarios: Usuarios) {
                 Modifier.padding(top = 36.dp , bottom = 40.dp)
             ) {
                 Text(
-                    text = "Lorem ipsum dolor sit amet consectetur. Tristique nisl quisque in hac sit consequat eu mattis. Aliquam amet ac vitae blandit. Mauris nulla egestas aliquet cras commodo consequat. Ut congue commodo nunc maecenas.",
+                    text = "Marcio e Wagner combinaram suas habilidades em programação e design para criar um " +
+                            "aplicativo inovador voltado para a saúde mental. Sua colaboração resultou em " +
+                            "uma ferramenta que oferece suporte emocional, promove o bem-estar e torna a g" +
+                            "estão da saúde mental mais acessível a todos.",
                     Modifier.padding(start = 10.dp , end = 10.dp),
                     style = TextStyle(
                         fontSize = 14.sp,
