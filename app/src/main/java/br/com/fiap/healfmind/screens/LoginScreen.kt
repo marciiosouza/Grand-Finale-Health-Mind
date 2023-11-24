@@ -128,6 +128,7 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                         )
                     )
 
+
                     Text(
                         text = "Insira seus dados para realizar o login",
                         style = TextStyle(

@@ -21,6 +21,7 @@ import kotlin.math.log
 @Composable
 fun VideoPlayerScreen(meditacaoId : String ) {
 
+
     var numberId = meditacaoId.toInt()
     Log.i("VideoPlayer", "VideoPlayerScreen:${meditacaoId} ")
     var meditacao by remember { mutableStateOf(Meditacao(0,"","" , "")) }

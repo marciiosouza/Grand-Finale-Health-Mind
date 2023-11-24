@@ -74,6 +74,7 @@ fun MarcarConsultaScreen( marcarConsultaScreenViewModel: MarcarConsultaScreenVie
 
 
 
+
             CaixaDeEntrada(
                 label = "Presencia ou online",
                 placeholder = "Presencia ou online",

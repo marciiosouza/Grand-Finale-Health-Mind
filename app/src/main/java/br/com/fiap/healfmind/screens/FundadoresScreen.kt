@@ -95,6 +95,7 @@ fun FundadoresScreen(navController: NavController , usuarios: Usuarios) {
             Column(
                 Modifier.padding(top = 36.dp , bottom = 40.dp)
             ) {
+
                 Text(
                     text = "Marcio e Wagner combinaram suas habilidades em programação e design para criar um " +
                             "aplicativo inovador voltado para a saúde mental. Sua colaboração resultou em " +

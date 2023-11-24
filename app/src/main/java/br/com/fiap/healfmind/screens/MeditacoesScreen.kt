@@ -364,13 +364,10 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios , medita
 
                                     ))
                             }
-
-
                         }
                     }
                 }
             }
-
         }
     }
 }

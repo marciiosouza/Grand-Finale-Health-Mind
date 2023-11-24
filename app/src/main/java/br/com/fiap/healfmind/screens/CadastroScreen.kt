@@ -46,7 +46,6 @@ import retrofit2.Response
 @Composable
 fun CadastroScreen(navController: NavController, cadastroScreenViewModel: CadastroScreenViewModel) {
 
-
     val nome by cadastroScreenViewModel.nome.observeAsState(initial = "")
     val email by cadastroScreenViewModel.email.observeAsState(initial = "")
     val senha by cadastroScreenViewModel.senha.observeAsState(initial = "")
