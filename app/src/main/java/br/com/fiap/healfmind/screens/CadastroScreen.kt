@@ -50,7 +50,7 @@ fun CadastroScreen(navController: NavController, cadastroScreenViewModel: Cadast
     val email by cadastroScreenViewModel.email.observeAsState(initial = "")
     val senha by cadastroScreenViewModel.senha.observeAsState(initial = "")
     var fotoPerfil by remember {
-        mutableStateOf("")
+        mutableStateOf("fotopadrao.jpg")
     }
     val context = LocalContext.current
     val usuarioRepository = UsuarioRepository(context)

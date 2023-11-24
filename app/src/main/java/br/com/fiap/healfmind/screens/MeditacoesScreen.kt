@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +24,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -31,6 +33,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -52,24 +55,32 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.healfmind.R
+import br.com.fiap.healfmind.components.ButtonAccess
 import br.com.fiap.healfmind.components.Header
 import br.com.fiap.healfmind.components.MeditacoesItem
 import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.model.MeditacaoDestaque
 import br.com.fiap.healfmind.model.Usuarios
+import br.com.fiap.healfmind.service.MeditacoesService
 import br.com.fiap.healfmind.service.RetrofitFactory
 import br.com.fiap.healfmind.ui.theme.purple_gradient
+import br.com.fiap.healfmind.viewModel.MeditacoesViewModel
 import coil.compose.AsyncImage
 import com.example.healf_mind.components.CaixaDeEntrada
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.time.LocalDateTime
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
+fun MeditacoesScreen( navController: NavController , usuarios: Usuarios , meditacoesViewModel: MeditacoesViewModel  ) {
+
+    val tituloMeditacao by meditacoesViewModel.tituloMeditacao.observeAsState("")
+
 
     var meditacoes by remember { mutableStateOf<List<Meditacao>>(emptyList()) }
     var meditacaoDestaque by remember { mutableStateOf(Meditacao(0, "","","")) }
@@ -103,6 +114,28 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
             }
 
         })
+
+    }
+
+    fun PesquisarPorTitulo(){
+        val call = RetrofitFactory()
+            .getMeditacoesService()
+            .PesquisarMeditacao(tituloMeditacao)
+        call.enqueue(object : Callback<List<Meditacao>> {
+            override fun onResponse(
+                call: Call<List<Meditacao>>,
+                response: Response<List<Meditacao>>
+            ) {
+                Log.i("b1221", "onResponse:${response.body()} ")
+                meditacoes = response.body()?: emptyList()
+            }
+
+            override fun onFailure(call: Call<List<Meditacao>>, t: Throwable) {
+                Log.i("x1232", "onFailure:${t.message} ")
+            }
+
+        })
+
 
     }
 
@@ -154,24 +187,37 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
                     }
 
                     item (span = {GridItemSpan(maxLineSpan)} ) {
-                        CaixaDeEntrada(
-                            label = "",
-                            placeholder = "Pesquisar",
-                            value = "",
-                            keyboardType = KeyboardType.Text,
-                            modifier = Modifier
-                                .width(450.dp)
-                                .border(
-                                    width = 1.dp,
-                                    color = Color(0xFFB5B5B5),
-                                    shape = RoundedCornerShape(size = 5.dp)
-                                ),
-                            atualizarValor = {},
-                            error = false,
-                            iconImage = R.drawable.search,
-                            colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            CaixaDeEntrada(
+                                label = "",
+                                placeholder = "Pesquisar",
+                                value = tituloMeditacao,
+                                keyboardType = KeyboardType.Text,
+                                modifier = Modifier
+                                    .width(450.dp)
+                                    .border(
+                                        width = 1.dp,
+                                        color = Color(0xFFB5B5B5),
+                                        shape = RoundedCornerShape(size = 5.dp)
+                                    ),
+                                atualizarValor = {
+                                    meditacoesViewModel.onTituloChanged(it)
+                                },
+                                error = false,
+                                iconImage = R.drawable.search,
+                                colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF))
 
-                        )
+                            )
+                            Button(onClick = {
+                                             PesquisarPorTitulo()
+                            },Modifier.size(30.dp)) {
+
+                            }
+
+                        }
 
                     }
 
@@ -335,5 +381,5 @@ fun MeditacoesScreen( navController: NavController , usuarios: Usuarios  ) {
 @Composable
 fun MeditacoesScreenPreview(){
 
-    MeditacoesScreen(  navController = rememberNavController() , usuarios = Usuarios(1,"","", "",""))
+    MeditacoesScreen(  navController = rememberNavController() , usuarios = Usuarios(1,"","", "",""), meditacoesViewModel = MeditacoesViewModel())
 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import br.com.fiap.healfmind.model.Meditacao
 import br.com.fiap.healfmind.model.Usuarios
 import br.com.fiap.healfmind.screens.CadastroScreen
+import br.com.fiap.healfmind.screens.FundadoresScreen
 import br.com.fiap.healfmind.screens.HomeScreen
 import br.com.fiap.healfmind.screens.MarcarConsultaScreen
 import br.com.fiap.healfmind.screens.MeditacoesScreen
@@ -31,6 +32,7 @@ import br.com.fiap.healfmind.screens.VideoPlayerScreen
 import br.com.fiap.healfmind.ui.theme.HealfMindTheme
 import br.com.fiap.healfmind.viewModel.CadastroScreenViewModel
 import br.com.fiap.healfmind.viewModel.MarcarConsultaScreenViewModel
+import br.com.fiap.healfmind.viewModel.MeditacoesViewModel
 import br.com.fiap.healfmind.viewModel.PerfilScreenViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -100,7 +102,7 @@ class MainActivity : ComponentActivity() {
                             MarcarConsultaScreen(MarcarConsultaScreenViewModel())
                         }
                         composable(route = "Meditacoes") {
-                            MeditacoesScreen(navController, usuario )
+                            MeditacoesScreen(navController, usuario , MeditacoesViewModel())
                         }
                         composable(route = "VideoMeditacao/{meditacaoId}") {
                             var meditacaoId = it.arguments?.getString("meditacaoId")
@@ -108,6 +110,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = "Menu"){
                             MenuScreen(usuarios = usuario, navController = navController)
+                        }
+                        composable(route = "Fundadores"){
+                            FundadoresScreen(navController = navController, usuarios = usuario)
                         }
                     }
                 }

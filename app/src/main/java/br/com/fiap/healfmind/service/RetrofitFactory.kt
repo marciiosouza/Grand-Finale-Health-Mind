@@ -6,6 +6,7 @@ import retrofit2.create
 class RetrofitFactory {
 
     private val URL = "http://10.0.2.2:5212/"
+    //private val URL = "191.233.203.36"
 
     private val retrofitFactory = Retrofit.Builder().baseUrl(URL).addConverterFactory(
         GsonConverterFactory.create()).build()

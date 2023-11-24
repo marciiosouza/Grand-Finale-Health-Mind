@@ -64,6 +64,8 @@ fun LoginScreen( loginScreenViewModel: LoginScreenViewModel ,navController: NavC
                     Log.i("Deu certo", "${respostaApi} ")
                     onLoginSuccess(respostaApi)
                     navController.navigate("Home")
+                }else{
+                    Log.i("TAG", "onResponse: Vazio")
                 }
             }
             override fun onFailure(call: Call<Usuarios>, t: Throwable) {

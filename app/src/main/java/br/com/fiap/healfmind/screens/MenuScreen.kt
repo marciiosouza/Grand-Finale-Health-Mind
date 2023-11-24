@@ -116,6 +116,131 @@ fun MenuScreen(navController: NavHostController, usuarios: Usuarios) {
                     )
                 )
 
+
+                Column (
+                    Modifier.padding(top = 30.dp).height(220.dp).width(150.dp),
+                    Arrangement.SpaceBetween,
+
+                ){
+                    Row (
+                        Modifier.fillMaxWidth(),
+                        Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ){
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_person),
+                            contentDescription = "image description",
+                            Modifier
+                                .height(18.dp)
+                                .width(18.dp).clickable {
+                                    navController.navigate("Perfil")
+                                },
+                            contentScale = ContentScale.FillBounds,
+
+                        )
+                        Text(
+                            text = "Meu Perfil",
+                            Modifier.padding(10.dp).clickable {
+                                navController.navigate("Perfil")
+                            },
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                lineHeight = 25.2.sp,
+                                fontFamily = FontFamily(Font(R.font.inter_bold)),
+                                fontWeight = FontWeight(600),
+                                color = Color(0xFFFFFFFF),
+
+                            )
+                        )
+                    }
+                    Row (
+                        Modifier.fillMaxWidth(),
+                        Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_play),
+                            contentDescription = "image description",
+                            Modifier
+                                .height(18.dp)
+                                .width(18.dp).clickable {
+                                    navController.navigate("Meditacoes")
+                                },
+                            contentScale = ContentScale.FillBounds,
+
+
+                        )
+                        Text(
+                            text = "Meditações",
+                            Modifier.padding(10.dp).clickable {
+                                navController.navigate("Meditacoes")
+                            },
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                lineHeight = 25.2.sp,
+                                fontFamily = FontFamily(Font(R.font.inter_bold)),
+                                fontWeight = FontWeight(600),
+                                color = Color(0xFFFFFFFF),
+                            )
+                        )
+                    }
+                    Row (
+                        Modifier.fillMaxWidth(),
+                        Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically,
+
+                    ){
+                        Image(
+                            painter = painterResource(id = R.drawable.person_1),
+                            contentDescription = "image description",
+                            Modifier
+                                .height(15.dp)
+                                .width(15.dp),
+                            contentScale = ContentScale.FillBounds,
+                        )
+
+                        Text(
+                            text = "Comunidade",
+                            Modifier.padding(10.dp),
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                lineHeight = 25.2.sp,
+                                fontFamily = FontFamily(Font(R.font.inter_bold)),
+                                fontWeight = FontWeight(600),
+                                color = Color(0xFFFFFFFF),
+                            )
+                        )
+                    }
+
+                    Row (
+                        Modifier.fillMaxWidth(),
+                        Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = painterResource(id = R.drawable.interrogation),
+                            contentDescription = "image description",
+                            Modifier
+                                .height(18.dp)
+                                .width(18.dp),
+                            contentScale = ContentScale.FillBounds,
+                        )
+                        Text(
+                            text = "Sobre nós",
+                            Modifier.padding(10.dp).clickable {
+                                navController.navigate("Fundadores")
+                            },
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                lineHeight = 25.2.sp,
+                                fontFamily = FontFamily(Font(R.font.inter_bold)),
+                                fontWeight = FontWeight(600),
+                                color = Color(0xFFFFFFFF),
+                            )
+                        )
+                    }
+                }
+
                 Spacer(modifier = Modifier.height(40.dp))
 
                 Row(
@@ -124,73 +249,6 @@ fun MenuScreen(navController: NavHostController, usuarios: Usuarios) {
                 ) {
 
                     Column {
-                        ButtonProfile(
-                            onClique = {
-                                       navController.navigate("Perfil")
-                            },
-                            navController = rememberNavController() ,
-                            textButton = "Meu Perfil",
-                            modifier = Modifier ,
-                            iconImage = R.drawable.icon_person,
-                            colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
-                            textColor = Color.White
-                        )
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        ButtonProfile(
-                            onClique = {
-                                navController.navigate("Meditacoes")
-                            },
-                            navController = rememberNavController() ,
-                            textButton = "Meditações",
-                            modifier = Modifier ,
-                            iconImage = R.drawable.icon_person,
-                            colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
-                            textColor = Color.White
-                        )
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        ButtonProfile(
-                            onClique = {
-
-                            },
-                            navController = rememberNavController() ,
-                            textButton = "Comunidade",
-                            modifier = Modifier ,
-                            iconImage = R.drawable.icon_person,
-                            colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
-                            textColor = Color.White
-                        )
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        ButtonProfile(
-                            onClique = {
-
-                            },
-                            navController = rememberNavController() ,
-                            textButton = "Sobre nós",
-                            modifier = Modifier ,
-                            iconImage = R.drawable.icon_person,
-                            colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
-                            textColor = Color.White
-                        )
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        ButtonAccess(
-                            clique = {
-                                navController.navigate("Login")
-                            },
-                            navController = rememberNavController(),
-                            textButton = "Sair da conta",
-                            modifier = Modifier,
-                            iconImage = R.drawable.icon_exit,
-                            colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
-                            textColor = Color.Black,
-                        )
                     }
                 }
             }
@@ -198,6 +256,73 @@ fun MenuScreen(navController: NavHostController, usuarios: Usuarios) {
     }
     }
 }
+//ButtonProfile(
+//onClique = {
+//    navController.navigate("Perfil")
+//},
+//navController = rememberNavController() ,
+//textButton = "Meu Perfil",
+//modifier = Modifier ,
+//iconImage = R.drawable.icon_person,
+//colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
+//textColor = Color.White
+//)
+//
+//Spacer(modifier = Modifier.height(10.dp))
+//
+//ButtonProfile(
+//onClique = {
+//    navController.navigate("Meditacoes")
+//},
+//navController = rememberNavController() ,
+//textButton = "Meditações",
+//modifier = Modifier ,
+//iconImage = R.drawable.icon_person,
+//colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
+//textColor = Color.White
+//)
+//
+//Spacer(modifier = Modifier.height(10.dp))
+//
+//ButtonProfile(
+//onClique = {
+//
+//},
+//navController = rememberNavController() ,
+//textButton = "Comunidade",
+//modifier = Modifier ,
+//iconImage = R.drawable.icon_person,
+//colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
+//textColor = Color.White
+//)
+//
+//Spacer(modifier = Modifier.height(10.dp))
+//
+//ButtonProfile(
+//onClique = {
+//    navController.navigate("Fundadores")
+//},
+//navController = rememberNavController() ,
+//textButton = "Sobre nós",
+//modifier = Modifier ,
+//iconImage = R.drawable.icon_person,
+//colorButtonColors = ButtonDefaults.buttonColors(Color.Transparent),
+//textColor = Color.White
+//)
+//
+//Spacer(modifier = Modifier.height(10.dp))
+//
+//ButtonAccess(
+//clique = {
+//    navController.navigate("Login")
+//},
+//navController = rememberNavController(),
+//textButton = "Sair da conta",
+//modifier = Modifier,
+//iconImage = R.drawable.icon_exit,
+//colorButtonColors = ButtonDefaults.buttonColors(Color(0xFFE6EFFF)),
+//textColor = Color.Black,
+//)
 
 @Preview
 @Composable

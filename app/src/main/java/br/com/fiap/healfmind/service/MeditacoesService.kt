@@ -7,6 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface MeditacoesService {
@@ -24,4 +25,7 @@ interface MeditacoesService {
 
     @GET("/meditacaoDestaque/")
     fun MeditacaoDestaque() :Call<Meditacao>
+
+    @POST("/meditacoes/pesquisarMeditacao/")
+    fun PesquisarMeditacao(@Body tituloMeditacao : String) : Call<List<Meditacao>>
 }
